@@ -9,101 +9,162 @@ body {
 	color: black;
     background-image: url("images/old_paper.jpg");
     background-repeat: none;
-    background-size: 100%;
+	background-size: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
 }
 
-header, footer {
-	padding: 30px 40px;
-}
+/* HEADER CSS */
 
 header {
 	background: #533527;
 	font-size: 2em;
 	color: white;
+	display: flex;
+	width: 90vw;
+	padding: 0vh 5vw;
+	height: 12vh;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 }
+
+header h1 {
+	font-size: 1.5em;
+	/* line-height: 1.5em; */
+	color: white;
+	text-align: left;
+}
+
+ /* The button used to open the sidebar */
+ .openbtn {
+	font-size: 1em;
+	cursor: pointer;
+	background-color: #533527;
+	color: white;
+	border: none;
+	right: 3vw;
+	border-radius: 1vh;
+	width: 6vh;
+	height: 6vh;
+	padding: 0%;
+	margin: 0%;
+
+	/* Fades when button values change, less jarring to look at */
+	-webkit-transition: background-color 0.6s, color 0.6s;
+  	transition: background-color 0.6s, color 0.6s;
+}
+
+  .openbtn:hover {
+	background-color: white;
+	color: #533527;
+
+	/* Fades when button values change, less jarring to look at */
+	-webkit-transition: background-color 0.6s, color 0.6s;
+  	transition: background-color 0.6s, color 0.6s;
+}
+
+/* MAIN CONTENT CSS */
 
 main {
 	overflow: auto;
 	background: none;
+	width: 100%;
+	height: 83vh; /* This plus the header (12vh) and footer (5vh) comes out to a page height of 100vh, which is a full window */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
-
-h1 {
+.choiceButton {
 	font-size: 2em;
-	line-height: 1.5em;
-	color: white;
-	text-align: center;
+	text-decoration: none;
+	color: black;
+	font-weight: bold;
+	background-color: rgba(83, 53, 39, 0.2); /* Same as the regular brown, but 80% transparent (20% remaining visible) */
+	padding: 2vh;
+	border-radius: 3vh;
+
+	/* Fades when button values change, less jarring to look at */
+	-webkit-transition: background-color 0.6s, color 0.6s;
+  	transition: background-color 0.6s, color 0.6s;
 }
-/* The sidebar menu */
+
+.choiceButton:hover {
+	background-color: rgba(83, 53, 39, 1);
+	color: white;
+
+	/* Fades when button values change, less jarring to look at */
+	-webkit-transition: background-color 0.6s, color 0.6s;
+  	transition: background-color 0.6s, color 0.6s;
+}
+
+/* SIDEBAR CSS */
 .sidebar {
-	height: 100%; /* 100% Full-height */
+	height: 90vh;
 	width: 0; /* 0 width - change this with JavaScript */
 	position: fixed; /* Stay in place */
-	z-index: 1;
-	top: 0;
+	z-index: 4;
+	padding-bottom: 10vh;
 	right: 0;
 	background-color: #111; /* Black*/
 	overflow-x: hidden; /* Disable horizontal scroll */
-	padding-top: 60px; /* Place content 60px from the top */
 	transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
 	float: right;
-  }
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
   
-  /* The sidebar links */
-  .sidebar a {
-	padding: 8px 8px 8px 32px;
+/* The sidebar links */
+.sidebar a {
 	text-decoration: none;
 	font-size: 25px;
 	color: #818181;
 	display: block;
 	transition: 0.3s;
-  }
+	padding: 4vh 0vw 4vh 2vw; 
+	
+}
   
-  /* When you mouse over the navigation links, change their color */
-  .sidebar a:hover {
+/* When you mouse over the navigation links, change their color */
+.sidebar a:hover {
 	color: #f1f1f1;
-  }
+}
   
-  /* Position and style the close button (top right corner) */
-  .sidebar .closebtn {
-	position: absolute;
-	top: 0;
-	left: 0px;
+/* Position and style the close button (top right corner) */
+.sidebar .closebtn {
 	font-size: 36px;
 	margin-right: 50px;
-  }
+}
   
-  /* The button used to open the sidebar */
-  .openbtn {
-	font-size: 20px;
-	cursor: pointer;
-	background-color: #533527;
-	color: white;
-	padding: 5px 5px;
-	border: none;
-	position: fixed;
-	right: 40px;
-	top: 25px;
-  }
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#open {
+	transition: margin-right .5s;
+}
   
-  .openbtn:hover {
-	background-color: #444;
-  }
-  
-  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-  #open {
-	transition: margin-right .5s; /* If you want a transition effect */
-	padding: 20px;
-  }
-  
-  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-  @media screen and (max-height: 450px) {
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
 	.sidebar {padding-top: 15px;}
 	.sidebar a {font-size: 18px;}
-  }
+}
+
+/* FOOTER CSS */
 
 footer {
 	background: #533527;
 	text-align: center;
 	color: white;
+	width: 100vw;
+	position: absolute;
+	bottom: 0;
+	height: 5vh;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 }
