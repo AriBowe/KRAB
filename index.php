@@ -6,8 +6,8 @@ include 'sidebar.php';
 ?>
 
 <main>
-    <article>
-        <a class="choiceButton" href="#">CLICK TO PLAY</a>
+    <article class="decision">
+        <a class="choiceButton" href="/game.php">CLICK TO PLAY</a>
     </article>
 </main>
 
