@@ -3,5 +3,5 @@
     <a href="#">Home</a>
     <a href="#">About</a>
     <a href="#">Data</a>
-    <a href="#">Contact</a>
+    <a href="#">Contact Us</a>
 </div>

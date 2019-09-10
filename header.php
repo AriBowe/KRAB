@@ -11,9 +11,8 @@
 
 	<body>
 		<header>
-			<h1>
-				NAME OF WEBSITE HERE
-			</h1>
+			<h1>CONVICTED!</h1>
+			
 			<div id="open">
 				<button class="openbtn" onclick="openNav()">&#9776; </button> 
 			</div>
