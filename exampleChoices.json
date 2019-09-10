@@ -1,0 +1,71 @@
+{
+    "1A": {
+        "flavourText": "What do",
+        "choices": {
+            "1": {
+                "choiceText": "Nothing",
+                "outcomeCode": "2A"
+            },
+            "2": {
+                "choiceText": "Something",
+                "outcomeCode": "2B"
+            },
+            "3": {
+                "choiceText": "Everything",
+                "outcomeCode": "2C"
+            }
+        }
+
+    },
+    "2A": {
+        "flavourText": "",
+        "choices": {
+            "1": {
+                "choiceText": "",
+                "outcomeCode": ""
+            },
+            "2": {
+                "choiceText": "",
+                "outcomeCode": ""
+            },
+            "3": {
+                "choiceText": "",
+                "outcomeCode": ""
+            }
+        }
+    },
+    "2B": {
+        "flavourText": "",
+        "choices": {
+            "1": {
+                "choiceText": "",
+                "outcomeCode": ""
+            },
+            "2": {
+                "choiceText": "",
+                "outcomeCode": ""
+            },
+            "3": {
+                "choiceText": "",
+                "outcomeCode": ""
+            }
+        }
+    },
+    "2C": {
+        "flavourText": "",
+        "choices": {
+            "1": {
+                "choiceText": "",
+                "outcomeCode": ""
+            },
+            "2": {
+                "choiceText": "",
+                "outcomeCode": ""
+            },
+            "3": {
+                "choiceText": "",
+                "outcomeCode": ""
+            }
+        }
+    }
+}
