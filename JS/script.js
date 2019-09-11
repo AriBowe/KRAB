@@ -49,36 +49,29 @@ function makeChoice(choiceCode) {
 
 $(document).ready(function() {
 
-    // var convictDataSearch = {
-    //     resource_id: "dbcfa4a6-3ec7-4264-bcee-43b21a470d34",
-    //     limit: 100
-    // }
-  
-    // var choiceDataSearch = {
-    //     resource_id: "TODO",
-    //     limit: 100
-    // }
+    var convictDataSearch = {
+        resource_id: "dbcfa4a6-3ec7-4264-bcee-43b21a470d34",
+        limit: 100
+    }
 
-    // $.ajax({
-    //     url: "https://data.qld.gov.au/api/3/action/datastore_search",
-    //     data: convictDataSearch,
-    //     dataType: "jsonp", // We use "jsonp" to ensure AJAX works correctly locally (otherwise it'll be blocked due to cross-site scripting).
-    //     cache: true,
-    //     success: function(results) {
-    //         window.convictData = results; // Global variable
-    //     }
-    // });
+    $.ajax({
+        url: "https://data.qld.gov.au/api/3/action/datastore_search",
+        data: convictDataSearch,
+        dataType: "jsonp", // We use "jsonp" to ensure AJAX works correctly locally (otherwise it'll be blocked due to cross-site scripting).
+        cache: true,
+        success: function(results) {
+            window.convictData = results; // Global variable
+        }
+    });
 
-    // $.ajax({
-    //     url: "TODO",
-    //     data: choiceDataSearch,
-    //     dataType: "jsonp", // We use "jsonp" to ensure AJAX works correctly locally (otherwise it'll be blocked due to cross-site scripting).
-    //     cache: true,
-    //     success: function(results) {
-    //         window.choiceData = results; // Global variable
-    //     }
-    // });
+    $.ajax({
+        url: "data/exampleChoices.json",
+        dataType: "json",
+        success: function(results) {
+            window.choiceData = results; // Global variable
+        }
+    });
 
-    window.choiceData = JSON.parse('{"1A":{"flavourText":"What do","choices":{"1":{"choiceText":"Nothing","outcomeCode":"2A"},"2":{"choiceText":"Something","outcomeCode":"2B"},"3":{"choiceText":"Everything","outcomeCode":"2C"}}},"2A":{"flavourText":"","choices":{"1":{"choiceText":"","outcomeCode":""},"2":{"choiceText":"","outcomeCode":""},"3":{"choiceText":"","outcomeCode":""}}},"2B":{"flavourText":"","choices":{"1":{"choiceText":"","outcomeCode":""},"2":{"choiceText":"","outcomeCode":""},"3":{"choiceText":"","outcomeCode":""}}},"2C":{"flavourText":"","choices":{"1":{"choiceText":"","outcomeCode":""},"2":{"choiceText":"","outcomeCode":""},"3":{"choiceText":"","outcomeCode":""}}}}')
+    // window.choiceData = JSON.parse('{"1A":{"flavourText":"What do","choices":{"1":{"choiceText":"Nothing","outcomeCode":"2A"},"2":{"choiceText":"Something","outcomeCode":"2B"},"3":{"choiceText":"Everything","outcomeCode":"2C"}}},"2A":{"flavourText":"","choices":{"1":{"choiceText":"","outcomeCode":""},"2":{"choiceText":"","outcomeCode":""},"3":{"choiceText":"","outcomeCode":""}}},"2B":{"flavourText":"","choices":{"1":{"choiceText":"","outcomeCode":""},"2":{"choiceText":"","outcomeCode":""},"3":{"choiceText":"","outcomeCode":""}}},"2C":{"flavourText":"","choices":{"1":{"choiceText":"","outcomeCode":""},"2":{"choiceText":"","outcomeCode":""},"3":{"choiceText":"","outcomeCode":""}}}}')
 
 });
