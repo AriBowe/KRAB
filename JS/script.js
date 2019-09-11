@@ -13,43 +13,72 @@ function closeNav() {
 }
 
 function makeChoice(choiceCode) {
-    $.ajax({
-		url: "choices_data.blahblahblah ADD SQL HERE",
-		data: data,
-		dataType: "jsonp", // We use "jsonp" to ensure AJAX works correctly locally (otherwise it'll be blocked due to cross-site scripting).
-		cache: true,
-		success: function(results) {
-			fillForm(results, choiceCode);
-		}
-	});
+    console.log(choiceData);
+
+    var eventElement = document.querySelector("#event > p:first-of-type"); // Selects the event description thing
+    var choicesElement = document.querySelector("#choices"); // Selects the choices article
+
+    var firstChild = choicesElement.firstElementChild;
+    while (firstChild) {
+        firstChild.remove();
+        firstChild = choicesElement.firstElementChild;
+    }
+
+    var eventText = choiceData[choiceCode].flavourText; // Gets flavour text of question
+    var choiceOptions = choiceData[choiceCode].choices; // Gets choices of question
+    var choicesNumber = (Object.keys(choiceOptions).length); // Gets the number of choices
+
+    eventElement.innerHTML = eventText.toString(); // Fills out the event on the page
+
+    for (i = 1; i <= choicesNumber; i++) {
+        console.log(i)
+        console.log(choiceOptions[i]);
+
+        var content = '<a class="choiceButton" onClick="makeChoice(\'' + choiceOptions[i].outcomeCode + '\')">' + choiceOptions[i].choiceText + '</a>';
+        console.log(content)
+        choicesElement.insertAdjacentHTML('beforeend', content);
+    }
+
+    // for (choice in choiceOptions) { // Creates choice buttons
+    //     console.log(choice);
+        
+    //     var content = '<a class="choiceButton" onClick="makeChoice(\'' + choice.outcomeCode + '\')">' + choiceData[choiceCode].choices.choiceText + '</a>';
+    //     choicesElement.insertAdjacentHTML('beforeend', content);
+    // }
 }
 
-function fillForm(results, choiceCode) {
-    console.log(results);
+$(document).ready(function() {
 
-    var eventTextTemplate = document.querySelector("#event > p:first-of-type");
-    var eventChoiceTemplate = document.getElementsByClassName("choiceButton");
+    // var convictDataSearch = {
+    //     resource_id: "dbcfa4a6-3ec7-4264-bcee-43b21a470d34",
+    //     limit: 100
+    // }
+  
+    // var choiceDataSearch = {
+    //     resource_id: "TODO",
+    //     limit: 100
+    // }
 
-    var eventText = records.choiceCode["flavourText"];
-    // $.each(results.choiceCode.choices, function(choiceNumber, choiceOutcomeCode) {
-    //     var recordTitle = recordValue["dc:title"];
-	// 	var recordYear = getYear(recordValue["dcterms:temporal"]);
-	// 	var recordImage = recordValue["150_pixel_jpg"];
-	// 	var recordDescription = recordValue["dc:description"];
+    // $.ajax({
+    //     url: "https://data.qld.gov.au/api/3/action/datastore_search",
+    //     data: convictDataSearch,
+    //     dataType: "jsonp", // We use "jsonp" to ensure AJAX works correctly locally (otherwise it'll be blocked due to cross-site scripting).
+    //     cache: true,
+    //     success: function(results) {
+    //         window.convictData = results; // Global variable
+    //     }
+    // });
 
-	// 	if(recordTitle && recordYear && recordImage && recordDescription) {
+    // $.ajax({
+    //     url: "TODO",
+    //     data: choiceDataSearch,
+    //     dataType: "jsonp", // We use "jsonp" to ensure AJAX works correctly locally (otherwise it'll be blocked due to cross-site scripting).
+    //     cache: true,
+    //     success: function(results) {
+    //         window.choiceData = results; // Global variable
+    //     }
+    // });
 
-	// 		var clonedRecordTemplate = recordTemplate.clone();
-	// 		clonedRecordTemplate.attr("id", "record-" + recordID).removeClass("record-template");
-	// 		clonedRecordTemplate.appendTo("#records");
+    window.choiceData = JSON.parse('{"1A":{"flavourText":"What do","choices":{"1":{"choiceText":"Nothing","outcomeCode":"2A"},"2":{"choiceText":"Something","outcomeCode":"2B"},"3":{"choiceText":"Everything","outcomeCode":"2C"}}},"2A":{"flavourText":"","choices":{"1":{"choiceText":"","outcomeCode":""},"2":{"choiceText":"","outcomeCode":""},"3":{"choiceText":"","outcomeCode":""}}},"2B":{"flavourText":"","choices":{"1":{"choiceText":"","outcomeCode":""},"2":{"choiceText":"","outcomeCode":""},"3":{"choiceText":"","outcomeCode":""}}},"2C":{"flavourText":"","choices":{"1":{"choiceText":"","outcomeCode":""},"2":{"choiceText":"","outcomeCode":""},"3":{"choiceText":"","outcomeCode":""}}}}')
 
-	// 		$("#record-" + recordID + " h2").html(recordTitle);
-	// 		$("#record-" + recordID + " .year").html(recordYear);
-	// 		$("#record-" + recordID + " .description").html(recordDescription);
-	// 		$("#record-" + recordID + " img").attr("src", recordImage);
-
-	// 	}
-
-    // }); TODO: THIS SHIT
-
-}
+});

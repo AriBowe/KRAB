@@ -6,6 +6,7 @@
 		<title>DECO1800 - </title>
 		<link rel="stylesheet" href="style.css">
 		<link href="https://fonts.googleapis.com/css?family=EB+Garamond&display=swap" rel="stylesheet"> 
+		<script src="JS/jquery-3.4.1.min.js"></script>
 		<script src="JS/script.js"></script>
 	</head>
 
