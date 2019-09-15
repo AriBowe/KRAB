@@ -12,8 +12,24 @@ function closeNav() {
     document.getElementsByClassName("openbtn")[0].setAttribute("onclick", "openNav()");
 }
 
-function makeChoice(choiceCode) {
-    console.log(choiceData);
+var wantedValue = [0, 0]; // Wanted value in pounds and shillings
+var playerName = "placeholder name" // TODO: Pull this from SLQ data
+var dateOfDeath = "1/1/1 - placeholder" // TODO: Pull this from SLQ data as well
+
+
+function makeChoice(choiceCode, rawValue = "0p0s") {
+    if (choiceCode.startsWith("random")) {
+        if (Math.random() < 0.5) {
+            choiceCode = choiceCode.split(" ")[1]
+        } else {
+            choiceCode = choiceCode.split(" ")[2]
+        }
+    }
+
+    if (choiceCode.startsWith("ending")) {
+        endingChoice(choiceCode);
+        return;
+    }
 
     var eventElement = document.querySelector("#event > p:first-of-type"); // Selects the event description thing
     var choicesElement = document.querySelector("#choices"); // Selects the choices article
@@ -31,20 +47,57 @@ function makeChoice(choiceCode) {
     eventElement.innerHTML = eventText.toString(); // Fills out the event on the page
 
     for (i = 1; i <= choicesNumber; i++) {
-        console.log(i)
-        console.log(choiceOptions[i]);
-
-        var content = '<a class="choiceButton" onClick="makeChoice(\'' + choiceOptions[i].outcomeCode + '\')">' + choiceOptions[i].choiceText + '</a>';
-        console.log(content)
+        var content = '<a class="choiceButton" onClick="makeChoice(\'' + choiceOptions[i].outcomeCode + '\', \'' + choiceOptions[i].choiceValue + '\')">' + choiceOptions[i].choiceText + '</a>';
         choicesElement.insertAdjacentHTML('beforeend', content);
     }
 
-    // for (choice in choiceOptions) { // Creates choice buttons
-    //     console.log(choice);
-        
-    //     var content = '<a class="choiceButton" onClick="makeChoice(\'' + choice.outcomeCode + '\')">' + choiceData[choiceCode].choices.choiceText + '</a>';
-    //     choicesElement.insertAdjacentHTML('beforeend', content);
-    // }
+    addWantedValue(rawValue);
+}
+
+function addWantedValue(rawValue) {
+    try {
+        var poundValue = Number(rawValue.toString().split("p")[0]); // Extracts crime value in pounds, as a number
+    } catch(TypeError) {
+        var poundValue = 0;
+    }
+
+    if (isNaN(poundValue)) {
+        var poundValue = 0;
+    }
+
+    try {
+        var shillingValue = Number(rawValue.toString().split("p")[1].split("s")[0]); // Extracts crime value in shillings, as a number
+    } catch(TypeError) {
+        var shillingValue = 0;
+    }
+
+    var currentShillingValue = wantedValue[1];
+
+    while (shillingValue + currentShillingValue >= 20) {
+        poundValue += 1;
+        shillingValue -= 20;
+    }
+
+    wantedValue[0] += poundValue;
+    wantedValue[1] += shillingValue;
+}
+
+function endingChoice(choiceCode) {
+    var eventElement = document.querySelector("#event > p:first-of-type"); // Selects the event description thing
+    var choicesElement = document.querySelector("#choices"); // Selects the choices article
+
+    eventElement.remove();
+    choicesElement.remove();
+
+    var fieldsOptions = choiceData[choiceCode].fields; // Gets fields of question
+    var fieldsNumber = (Object.keys(fieldsOptions).length); // Gets the number of fields
+
+    wantedValue = String(wantedValue[0]) + " pence, " + String(wantedValue[1]) + " shillings";
+
+    for (i = 1; i <= fieldsNumber; i++) {
+        var content = '<p><strong>' + fieldsOptions[i].title + '</strong> ' + eval(fieldsOptions[i].value) + '</p>';
+        document.querySelector("main").insertAdjacentHTML('beforeend', content);
+    }
 }
 
 $(document).ready(function() {
@@ -65,7 +118,7 @@ $(document).ready(function() {
     });
 
     $.ajax({
-        url: "data/exampleChoices.json",
+        url: "data/choices.json",
         dataType: "json",
         success: function(results) {
             window.choiceData = results; // Global variable

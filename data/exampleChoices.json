@@ -1,70 +1,81 @@
 {
     "1A": {
-        "flavourText": "What do",
+        "flavourText": "What",
         "choices": {
             "1": {
                 "choiceText": "Nothing",
-                "outcomeCode": "2A"
+                "outcomeCode": "2A",
+                "choiceValue": "1p19s"
             },
             "2": {
                 "choiceText": "Something",
-                "outcomeCode": "2B"
+                "outcomeCode": "2B",
+                "choiceValue": "2p"
             },
             "3": {
                 "choiceText": "Everything",
-                "outcomeCode": "2C"
+                "outcomeCode": "2C",
+                "choiceValue": "15s"
             }
         }
-
     },
     "2A": {
-        "flavourText": "",
+        "flavourText": "h",
         "choices": {
             "1": {
-                "choiceText": "",
-                "outcomeCode": ""
+                "choiceText": "Nothing",
+                "outcomeCode": "2A",
+                "choiceValue": "1p19s"
             },
             "2": {
-                "choiceText": "",
-                "outcomeCode": ""
+                "choiceText": "Something",
+                "outcomeCode": "2B",
+                "choiceValue": "2p"
             },
             "3": {
-                "choiceText": "",
-                "outcomeCode": ""
+                "choiceText": "Everything",
+                "outcomeCode": "2C",
+                "choiceValue": "15s"
             }
         }
     },
     "2B": {
-        "flavourText": "",
+        "flavourText": "h",
         "choices": {
             "1": {
-                "choiceText": "",
-                "outcomeCode": ""
+                "choiceText": "Nothing",
+                "outcomeCode": "2A",
+                "choiceValue": "1p19s"
             },
             "2": {
-                "choiceText": "",
-                "outcomeCode": ""
+                "choiceText": "Something",
+                "outcomeCode": "2B",
+                "choiceValue": "2p"
             },
             "3": {
-                "choiceText": "",
-                "outcomeCode": ""
+                "choiceText": "Everything",
+                "outcomeCode": "2C",
+                "choiceValue": "15s"
             }
         }
     },
     "2C": {
-        "flavourText": "",
+        "flavourText": "h",
         "choices": {
             "1": {
-                "choiceText": "",
-                "outcomeCode": ""
+                "choiceText": "Nothing",
+                "outcomeCode": "2A",
+                "choiceValue": "1p19s"
             },
             "2": {
-                "choiceText": "",
-                "outcomeCode": ""
+                "choiceText": "Something",
+                "outcomeCode": "2B",
+                "choiceValue": "2p"
             },
             "3": {
-                "choiceText": "",
-                "outcomeCode": ""
+                "choiceText": "Everything",
+                "outcomeCode": "2C",
+                "choiceValue": "15s"
             }
         }
     }

@@ -1,0 +1,308 @@
+{
+    "1A": {
+        "flavourText": "Your family has not eaten in three days, you need money. What should you do?",
+        "choices": {
+            "1": {
+                "choiceText": "Pickpocket",
+                "outcomeCode": "2A",
+                "choiceValue": "2p"
+            },
+            "2": {
+                "choiceText": "Steal bread",
+                "outcomeCode": "2A",
+                "choiceValue": "1p"
+            },
+            "3": {
+                "choiceText": "Find a job",
+                "outcomeCode": "2B",
+                "choiceValue": "0p0s"
+            }
+        }
+
+    },
+    "2A": {
+        "flavourText": "You get caught by a policeman! What do you do?",
+        "choices": {
+            "1": {
+                "choiceText": "Run",
+                "outcomeCode": "random 3A 3B",
+                "choiceValue": "2p"
+            },
+            "2": {
+                "choiceText": "Fight",
+                "outcomeCode": "random 3C 3D",
+                "choiceValue": "5p"
+            },
+            "3": {
+                "choiceText": "Surrender yourself",
+                "outcomeCode": "3E",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "2B": {
+        "flavourText": "The bakery is hiring! Unfortunately, you did not get the job. The baker said your lack of experience would prove useless in his kitchen. What should you do?",
+        "choices": {
+            "1": {
+                "choiceText": "Go home",
+                "outcomeCode": "3F",
+                "choiceValue": "0p0s"
+            },
+            "2": {
+                "choiceText": "Steal bread",
+                "outcomeCode": "2A",
+                "choiceValue": "1p"
+            },
+            "3": {
+                "choiceText": "Pickpocket",
+                "outcomeCode": "2A",
+                "choiceValue": "2p"
+            }
+        }
+    },
+    "3A": {
+        "flavourText": "Where do you run?",
+        "choices": {
+            "1": {
+                "choiceText": "Home",
+                "outcomeCode": "4A",
+                "choiceValue": "10s"
+            },
+            "2": {
+                "choiceText": "Into a building",
+                "outcomeCode": "4C",
+                "choiceValue": "2p"
+            },
+            "3": {
+                "choiceText": "An alleyway",
+                "outcomeCode": "4B",
+                "choiceValue": "5p"
+            }
+        }
+    },
+    "3B": {
+        "flavourText": "You try to run, but the policeman grabs on to you and doesn't let you go! What do you do?",
+        "choices": {
+            "1": {
+                "choiceText": "Fight",
+                "outcomeCode": "random 3C 3D",
+                "choiceValue": "5p"
+            },
+            "2": {
+                "choiceText": "Surrender yourself",
+                "outcomeCode": "3E",
+                "choiceValue": "0p0s"
+            }
+        }
+
+    },
+    "3C": {
+        "flavourText": "You manage to fight off the policeman, but you need to get away before more show up",
+        "choices": {
+            "1": {
+                "choiceText": "Run",
+                "outcomeCode": "3A",
+                "choiceValue": "0p0s"
+            }
+        }
+
+    },
+    "3D": {
+        "flavourText": "You try to fight, but you're not strong enough to get away",
+        "choices": {
+            "1": {
+                "choiceText": "Surrender yourself",
+                "outcomeCode": "3E",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "3E": {
+        "flavourText": "You give up, and the policeman roughly handcuffs you before escorting you to a gaol.",
+        "choices": {
+            "1": {
+                "choiceText": "Go along with him",
+                "outcomeCode": "4D",
+                "choiceValue": "0p0s"
+            },
+            "2": {
+                "choiceText": "Struggle",
+                "outcomeCode": "4D",
+                "choiceValue": "2p"
+            }
+        }
+    },
+    "3F": {
+        "flavourText": "Due to the lack of food your son is now sick, you need some medicine or some money to buy some, or he will die. What do you do?",
+        "choices": {
+            "1": {
+                "choiceText": "Steal medicine",
+                "outcomeCode": "random 2A 4E",
+                "choiceValue": "1p"
+            },
+            "2": {
+                "choiceText": "Let him die",
+                "outcomeCode": "4F",
+                "choiceValue": "0p0s"
+            },
+            "3": {
+                "choiceText": "Pick pocket",
+                "outcomeCode": "2A",
+                "choiceValue": "2p"
+            }
+        }
+
+    },
+    "4A": {
+        "flavourText": "You make it home without getting caught! But waiting inside is the policeman!",
+        "choices": {
+            "1": {
+                "choiceText": "Accept fate",
+                "outcomeCode": "ending 1",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "4B": {
+        "flavourText": "You hide behind some old shelves and wait for the police to leave. Oh no! You stumble over a box and land on top of the policeman and he catches you!",
+        "choices": {
+            "1": {
+                "choiceText": "Accept fate",
+                "outcomeCode": "ending 1",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "4C": {
+        "flavourText": "The alleyway was a dead end! You have no where to run. The police box you in with no way to escape. You are escorted to the goal and and sentenced to live out your life in Australia",
+        "choices": {
+            "1": {
+                "choiceText": "Accept fate",
+                "outcomeCode": "ending 1",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "4D": {
+        "flavourText": "In the cell you notice some loose bricks. You remove them and it leads to a passage! Oh no someone is coming in to your cell. What do you do?",
+        "choices": {
+            "1": {
+                "choiceText": "Make a run for it though the passage",
+                "outcomeCode": "5A",
+                "choiceValue": "15p"
+            },
+            "2": {
+                "choiceText": "Panic!",
+                "outcomeCode": "5B",
+                "choiceValue": "25p"
+            }
+        }
+    },
+    "4E": {
+        "flavourText": "You evade the police and get the medicine for your son! But you still need food. What do you do?",
+        "choices": {
+            "1": {
+                "choiceText": "Pickpocket",
+                "outcomeCode": "2A",
+                "choiceValue": "2p"
+            },
+            "2": {
+                "choiceText": "Steal bread",
+                "outcomeCode": "2A",
+                "choiceValue": "1p"
+            }
+        }
+    },
+    "4F": {
+        "flavourText": "Due to the lack of food and the stress of losing your son, you and your wife die. You are later convicted for the prior crimes.",
+        "choices": {
+            "1": {
+                "choiceText": "Continue",
+                "outcomeCode": "ending 4",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "5A": {
+        "flavourText": "You hurry through the passage and run home.",
+        "choices": {
+            "1": {
+                "choiceText": "Get your family and flee town",
+                "outcomeCode": "ending 2",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "5B": {
+        "flavourText": "You grab a brick and hit the guard on his head! There's blood everywhere! Suddenly, another guard appears and sees the body, you quickly react and run through the passage.",
+        "choices": {
+            "1": {
+                "choiceText": "Run for your life",
+                "outcomeCode": "6A",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "6A": {
+        "flavourText": "You out run the police! But, you can't go back home, the police know where you live. You leave town.",
+        "choices": {
+            "1": {
+                "choiceText": "Continue to live your life full of crime and chaos.",
+                "outcomeCode": "ending 3",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "ending 1": {
+        "fields": {
+            "1": {
+                "title": "CAUGHT:",
+                "value": "playerName"
+            },
+            "2": {
+                "title": "TO BE EXILED TO AUSTRALIA",
+                "value": " "
+            },
+            "3": {
+                "title": "REWARD FOR INFO:",
+                "value": "wantedValue"
+            }
+        }
+    },
+    "ending 2": {
+        "fields": {
+            "1": {
+                "title": "WANTED:",
+                "value": "playerName"
+            },
+            "2": {
+                "title": "REWARD FOR INFO:",
+                "value": "wantedValue"
+            }
+        }
+    },
+    "ending 3": {
+        "fields": {
+            "1": {
+                "title": "WANTED - NOTORIOUS KILLER:",
+                "value": "playerName"
+            },
+            "2": {
+                "title": "REWARD FOR INFO:",
+                "value": "wantedValue"
+            }
+        }
+    },
+    "ending 4": {
+        "fields": {
+            "1": {
+                "title": "Obituary:",
+                "value": "playerName"
+            },
+            "2": {
+                "title": "Date of death:",
+                "value": "dateOfDeath"
+            }
+        }
+    }
+}
