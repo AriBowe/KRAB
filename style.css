@@ -97,6 +97,8 @@ main article:nth-of-type(2) {
 	font-size: 1.5em;
 	text-decoration: none;
 	color: black;
+	width: 7em; 
+	text-align: center;
 	font-weight: bold;
 	background-color: rgba(83, 53, 39, 0.2); /* Same as the regular brown, but 80% transparent (20% remaining visible) */
 	padding: 2vh;
