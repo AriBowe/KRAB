@@ -108,11 +108,7 @@ function iterateRecords(results) {
 	$.each(results.result.records, function(recordID, recordValue) {
 
 		var recordName = recordValue["Convict Name"];
-		var recordSentence = recordValue["Sentence Details"];
-		var recordVessel = recordValue["Vessel"];
-		var recordDepart = recordValue["Date of Departure"];
 		var recordTitle = recordValue["Title"];
-		var recordDescription = recordValue["dc:description"];
 
 		if(true) {
 
@@ -121,18 +117,7 @@ function iterateRecords(results) {
 			clonedRecordTemplate.appendTo("#records");
 
 			$("#record-" + recordID + " h2").html(recordName);
-			$("#record-" + recordID + " h2").html(recordSentence);
-			$("#record-" + recordID + " h2").html(recordVessel);
-			$("#record-" + recordID + " h2").html(recordDepart);
-			$("#record-" + recordID + " h2").html(recordTitle);
-			$("#record-" + recordID + " h2").html(recordDescription);
-			$("#record-" + recordID + " a").click(function(event) {
-				Strip.show({
-					url: recordImageLarge,
-					caption: recordTitle
-				});
-				event.preventDefault();
-			});
+			$("#record-" + recordID + " h3").html(recordTitle);
 
 		}
 

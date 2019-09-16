@@ -6,16 +6,13 @@ include 'sidebar.php';
 ?>
 
 <main>
-    <article class="Convicts">
-	
-
+    <article class="Convicts">	
 		<section id="records"></section>
 
 		<article class="record record-template">
-			<h2>Record Title</h2>
-				</a>
+            <h2>Record Name</h2>
+            <h3>Record Detail</h3>
 	
-			</section>
 		</article>
 
 		<script src="js/jquery-3.4.1.min.js"></script>
