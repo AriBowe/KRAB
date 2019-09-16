@@ -182,3 +182,41 @@ footer {
 	justify-content: center;
 	align-items: center;
 }
+
+#records {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.record {
+	display: block;
+	width: 10%;
+	padding: 2.5em;
+	background-color: #F2CFA1;
+	box-shadow: rgba(0,0,0,0.25) 0 5px 5px;
+	border-radius: 5px;
+	margin-bottom: 2%;
+	position: relative;
+}
+
+.record.record-template {
+	display: none;
+}
+
+.record .record-content {
+	display: flex;
+	align-items: flex-start;
+}
+
+.Convicts {
+	top: 15vh;
+	height: 100vh;
+	overflow: scroll;
+	position: fixed;
+}
+
+.Convicts h2 {
+	font-size: 10px;
+}
+

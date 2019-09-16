@@ -99,12 +99,70 @@ function endingChoice(choiceCode) {
         document.querySelector("main").insertAdjacentHTML('beforeend', content);
     }
 }
+function iterateRecords(results) {
+
+	console.log(results);
+
+	var recordTemplate = $(".record-template");
+
+	$.each(results.result.records, function(recordID, recordValue) {
+
+		var recordName = recordValue["Convict Name"];
+		var recordSentence = recordValue["Sentence Details"];
+		var recordVessel = recordValue["Vessel"];
+		var recordDepart = recordValue["Date of Departure"];
+		var recordTitle = recordValue["Title"];
+		var recordDescription = recordValue["dc:description"];
+
+		if(true) {
+
+			var clonedRecordTemplate = recordTemplate.clone();
+			clonedRecordTemplate.attr("id", "record-" + recordID).removeClass("record-template");
+			clonedRecordTemplate.appendTo("#records");
+
+			$("#record-" + recordID + " h2").html(recordName);
+			$("#record-" + recordID + " h2").html(recordSentence);
+			$("#record-" + recordID + " h2").html(recordVessel);
+			$("#record-" + recordID + " h2").html(recordDepart);
+			$("#record-" + recordID + " h2").html(recordTitle);
+			$("#record-" + recordID + " h2").html(recordDescription);
+			$("#record-" + recordID + " a").click(function(event) {
+				Strip.show({
+					url: recordImageLarge,
+					caption: recordTitle
+				});
+				event.preventDefault();
+			});
+
+		}
+
+	});
+
+	$("#record-count strong").text($(".record:visible").length);
+
+	$("#filter-text").keyup(function() {
+
+		var searchTerm = $(this).val();
+		console.log(searchTerm);
+	
+		$(".record").hide();
+		$(".record:contains('" + searchTerm + "')").show();
+	
+		$("#record-count strong").text($(".record:visible").length);
+	
+	});
+
+	setTimeout(function() {
+		$("body").addClass("loaded");
+	}, 2000); // 2 second delay
+
+}
 
 $(document).ready(function() {
 
     var convictDataSearch = {
         resource_id: "dbcfa4a6-3ec7-4264-bcee-43b21a470d34",
-        limit: 100
+        limit: 52
     }
 
     $.ajax({
@@ -114,7 +172,9 @@ $(document).ready(function() {
         cache: true,
         success: function(results) {
             window.convictData = results; // Global variable
-        }
+            iterateRecords(results);
+            }
+        
     });
 
     $.ajax({
@@ -128,3 +188,4 @@ $(document).ready(function() {
     // window.choiceData = JSON.parse('{"1A":{"flavourText":"What do","choices":{"1":{"choiceText":"Nothing","outcomeCode":"2A"},"2":{"choiceText":"Something","outcomeCode":"2B"},"3":{"choiceText":"Everything","outcomeCode":"2C"}}},"2A":{"flavourText":"","choices":{"1":{"choiceText":"","outcomeCode":""},"2":{"choiceText":"","outcomeCode":""},"3":{"choiceText":"","outcomeCode":""}}},"2B":{"flavourText":"","choices":{"1":{"choiceText":"","outcomeCode":""},"2":{"choiceText":"","outcomeCode":""},"3":{"choiceText":"","outcomeCode":""}}},"2C":{"flavourText":"","choices":{"1":{"choiceText":"","outcomeCode":""},"2":{"choiceText":"","outcomeCode":""},"3":{"choiceText":"","outcomeCode":""}}}}')
 
 });
+
