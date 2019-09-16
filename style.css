@@ -192,8 +192,11 @@ footer {
 .record {
 	display: block;
 	width: 10%;
-	padding: 2.5em;
-	background-color: #F2CFA1;
+	height: 270px;
+	padding: 5em;
+	background-image: url("images/poster.jpg");
+	background-repeat: none;
+	background-size: 100%;
 	box-shadow: rgba(0,0,0,0.25) 0 5px 5px;
 	border-radius: 5px;
 	margin-bottom: 2%;
@@ -210,16 +213,19 @@ footer {
 }
 
 .Convicts {
-	top: 15vh;
+	top: 12.5vh;
 	height: 100vh;
 	overflow: scroll;
 	position: fixed;
+	right:5vh;
+	left: 5vh
 }
 
 .Convicts h2 {
 	font-size: 20px;
+	font-style: bold;
 }
 .Convicts h3 {
-	font-size: 10px;
+	font-size: 12px;
 }
 

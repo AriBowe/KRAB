@@ -11,6 +11,7 @@ include 'sidebar.php';
 
 		<article class="record record-template">
             <h2>Record Name</h2>
+            <br>
             <h3>Record Detail</h3>
 	
 		</article>

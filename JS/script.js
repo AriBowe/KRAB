@@ -147,7 +147,7 @@ $(document).ready(function() {
 
     var convictDataSearch = {
         resource_id: "dbcfa4a6-3ec7-4264-bcee-43b21a470d34",
-        limit: 52
+        limit: 10
     }
 
     $.ajax({
