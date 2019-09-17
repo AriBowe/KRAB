@@ -4,7 +4,7 @@
 
 body {
 	font-family: 'EB Garamond', serif;
-	font-size: 21px;
+	font-size: 15px;
 	line-height: 1.5em;
 	color: black;
     background-image: url("images/old_paper.jpg");
@@ -84,6 +84,7 @@ main {
 
 #event {
 	text-align: center;
+	font-size: 30px;
 }
 
 main article:nth-of-type(2) {
