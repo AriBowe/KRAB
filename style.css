@@ -84,6 +84,40 @@ main {
 
 #event {
 	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#event img {
+	height: 20vh;
+	width: 20vh;
+	border-radius: 3vh;
+}
+
+#event h2 {
+	padding: 1%;
+	margin: 1%;
+	margin-left: 3%;
+	border-radius: 1vh;
+	white-space: nowrap;
+	background-color: rgb(83,53,39);
+	color: white;
+}
+
+#event p {
+	width: 100%;
+}
+
+#event div {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	justify-content: flex-start;
+	overflow: hidden;
+	padding: 2%;
+	width: 100%;
 }
 
 main article:nth-of-type(2) {
