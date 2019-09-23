@@ -15,6 +15,6 @@
 			<h1>CONVICTED!</h1>
 			
 			<div id="open">
-				<button class="openbtn" onclick="openNav()">&#9776; </button> 
+				<button class="openbtn" onclick="toggle_sidebar()">&#9776; </button> 
 			</div>
 		</header>

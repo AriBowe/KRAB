@@ -4,7 +4,7 @@
 
 body {
 	font-family: 'EB Garamond', serif;
-	font-size: 15px;
+	font-size: 21px;
 	line-height: 1.5em;
 	color: black;
     background-image: url("images/old_paper.jpg");
@@ -72,7 +72,7 @@ header h1 {
 main {
 	overflow: auto;
 	background: none;
-	width: 70%;
+	width: 70vw;
 	font-size: 1.5em;
 	line-height: 5vh;
 	height: 83vh; /* This plus the header (12vh) and footer (5vh) comes out to a page height of 100vh, which is a full window */
@@ -84,11 +84,11 @@ main {
 
 #event {
 	text-align: center;
-	font-size: 30px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
+	width: 70vw;
 }
 
 #event img {
@@ -98,7 +98,7 @@ main {
 }
 
 #event h2 {
-	padding: 1%;
+	padding: 2%;
 	margin: 1%;
 	margin-left: 3%;
 	border-radius: 1vh;
@@ -118,7 +118,6 @@ main {
 	justify-content: flex-start;
 	overflow: hidden;
 	padding: 2%;
-	width: 100%;
 }
 
 main article:nth-of-type(2) {
@@ -169,6 +168,7 @@ main article:nth-of-type(2) {
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: flex-start;
+	transition: margin-right .5s;
 }
   
 /* The sidebar links */
@@ -194,8 +194,34 @@ main article:nth-of-type(2) {
 }
   
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#open {
+.open {
 	transition: margin-right .5s;
+	width: 20vw;
+}
+
+@media screen and (max-width: 900px) {
+	.open {
+		width: 50vw;
+	}
+
+	#choices {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	#choices a {
+		margin: 2vh;
+	}
+
+	#event h2 {
+		white-space: normal;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.open {
+		width: 100vw;
+	}
 }
   
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
