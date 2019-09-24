@@ -8,8 +8,9 @@ body {
 	line-height: 1.5em;
 	color: black;
     background-image: url("images/old_paper.jpg");
-    background-repeat: none;
-	background-size: 100%;
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;

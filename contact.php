@@ -6,9 +6,9 @@ include 'sidebar.php';
 ?>
 
 <main>
-    <article id="event">
+    <article id="feedback">
         <div>   
-            <h2>Conact Us!</h2>
+            <h1>Leave us your feedback here!</h1>
         </div>
         <p> </p>
     </article>
