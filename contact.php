@@ -7,8 +7,26 @@ include 'sidebar.php';
 
 <main>
     <article id="feedback">
-        <div>   
-            <h1>Leave us your feedback here!</h1>
+            <section id="contact-form">
+       
+                <h2>Contact us</h2>
+                <br>
+                
+				<div class="form-item">
+                            <textarea id="form-name" name="mame" rows="1" placeholder="NAME"></textarea></label>
+							<textarea id="form-email" name="email" rows="1" placeholder="EMAIL"></textarea></label>
+								</div>
+                    <div class="form-element">
+                        <textarea id="form-comments" name="comments" rows="10" placeholder="MESSAGE"></textarea>
+					</div>
+                
+				<section id="submit">
+				<a href="#">SUBMIT</a>
+            </section>
+ 
+        </form>
+
+    </section>
         </div>
         <p> </p>
     </article>

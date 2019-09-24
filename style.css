@@ -217,6 +217,7 @@ main article:nth-of-type(2) {
 	#event h2 {
 		white-space: normal;
 	}
+
 }
 
 @media screen and (max-width: 500px) {
@@ -293,3 +294,37 @@ footer {
 	font-size: 12px;
 }
 
+input[type=text], textarea {
+	width: 100%;
+	border-color: rgb(83,53,39, 0.1);
+	border-style: solid;
+	border-width: 2px;
+	background-color: rgb(83,53,39, 0.1);
+	color: rgb(83,53,39);
+}
+
+input[type=text]:focus {
+	width: 100%;
+	border-radius: 15px;
+	color: rgb(83,53,39);
+}
+
+#submit a {
+	font-size: 20px;
+	text-decoration: none;
+	color: black;
+	width: 7em; 
+	font-weight: bold;
+	background-color: rgba(83, 53, 39, 0.2); /* Same as the regular brown, but 80% transparent (20% remaining visible) */
+	padding: 1vh;
+	border-radius: 3vh;
+}
+
+#submit a:hover { 
+	color: white;
+	background-color:  rgb(83,53,39);
+}
+
+#submit a:active {
+	color:  rgb(83,53,39);
+}
