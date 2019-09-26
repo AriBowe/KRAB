@@ -76,7 +76,6 @@ main {
 	width: 70vw;
 	font-size: 1.5em;
 	line-height: 5vh;
-	height: 83vh; /* This plus the header (12vh) and footer (5vh) comes out to a page height of 100vh, which is a full window */
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
@@ -89,6 +88,43 @@ main {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+#choices {
+	flex: 1;
+}
+
+#statusBar {
+    display: flex;
+	height: 8vh;
+	width: 90vw;
+	padding-left: 5vw;
+	padding-right: 5vw;
+	background-color: rgba(83, 53, 39, 0.75);
+	padding-top: 0;
+	margin-top: 0;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	color: white;
+}
+
+#statusBar #characterName::before {
+	content: "Player Name: ";
+	flex: 3;
+}
+
+#statusBar #day::before {
+	content: "Day ";
+	flex: 2;
+}
+
+#statusBar #savings::before {
+	content: "Savings: ";
+	flex: 1;
+}
+
+#statusBar #wantedValue::before {
+	content: "Wanted for: ";
+	flex: 1;
 }
 
 #event {
@@ -98,6 +134,7 @@ main {
 	justify-content: center;
 	align-items: flex-start;
 	width: 70vw;
+	flex: 1;
 }
 
 #event img {
@@ -130,7 +167,6 @@ main {
 }
 
 main article:nth-of-type(2) {
-	padding-bottom: 10vh;
 	display: flex;
 	justify-content: space-around;
 	width: 100%;
