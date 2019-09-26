@@ -29,11 +29,9 @@ var currentDay = 0;
 var currentSavings = [0, 0];
 
 function displayDay() {
-    while (true) {
-        currentDay += 1;
-        var content = '<div id="majorHeader"><p>' + currentDay + '</p></div>'
-        document.querySelector("main").insertAdjacentHTML('beforeend', content);
-    }
+    currentDay += 1;
+    var content = '<div id="majorHeader"><p>' + currentDay + '</p></div>'
+    document.querySelector("main").insertAdjacentHTML('beforeend', content);
 }
 
 function makeChoice(choiceCode, rawValue = "0p0s") {
@@ -51,8 +49,8 @@ function makeChoice(choiceCode, rawValue = "0p0s") {
     }
 
     if (choiceCode.startsWith("new day")) {
-        displayDay;
-        return;
+        displayDay();
+        choiceCode = "1A";
     }
 
     var eventElement = document.querySelector("#event > p:first-of-type"); // Selects the event description thing
@@ -76,6 +74,10 @@ function makeChoice(choiceCode, rawValue = "0p0s") {
     }
 
     addWantedValue(rawValue);
+
+    if (wantedValue[0] !== 0 || wantedValue[1] !== 0) {
+        updateWantedValue();
+    } 
 }
 
 function addWantedValue(rawValue) {
@@ -104,6 +106,11 @@ function addWantedValue(rawValue) {
 
     wantedValue[0] += poundValue;
     wantedValue[1] += shillingValue;
+}
+
+function updateWantedValue() {
+    var wantedElement = document.querySelector("#wantedValue");
+    wantedElement.innerHTML = wantedValue[0].toString() + " pence, " + wantedValue[1].toString() + " shillings";
 }
 
 function endingChoice(choiceCode) {
