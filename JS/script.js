@@ -21,23 +21,37 @@ function toggle_sidebar() {
 
 
 // --- MAIN GAME CODE --- //
-
+// Initialise variables
 var wantedValue = [0, 0]; // Wanted value in pounds and shillings
-var playerName = "placeholder name" // TODO: Pull this from SLQ data
-var dateOfDeath = "1/1/1 - placeholder" // TODO: Pull this from SLQ data as well
+var playerName = "placeholder name"; // TODO: Pull this from SLQ data
+var dateOfDeath = "1/1/1 - placeholder"; // TODO: Pull this from SLQ data as well
+var currentDay = 0;
+var currentSavings = [0, 0];
 
+function displayDay() {
+    while (true) {
+        currentDay += 1;
+        var content = '<div id="majorHeader"><p>' + currentDay + '</p></div>'
+        document.querySelector("main").insertAdjacentHTML('beforeend', content);
+    }
+}
 
 function makeChoice(choiceCode, rawValue = "0p0s") {
     if (choiceCode.startsWith("random")) {
         if (Math.random() < 0.5) {
-            choiceCode = choiceCode.split(" ")[1]
+            choiceCode = choiceCode.split(" ")[1];
         } else {
-            choiceCode = choiceCode.split(" ")[2]
+            choiceCode = choiceCode.split(" ")[2];
         }
     }
 
     if (choiceCode.startsWith("ending")) {
         endingChoice(choiceCode);
+        return;
+    }
+
+    if (choiceCode.startsWith("new day")) {
+        displayDay;
         return;
     }
 
