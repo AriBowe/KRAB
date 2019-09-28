@@ -28,11 +28,6 @@ var dateOfDeath = "1/1/1 - placeholder"; // TODO: Pull this from SLQ data as wel
 var currentDay = 0;
 var currentSavings = [0, 0];
 
-function displayDay() {
-    currentDay += 1;
-    var content = '<div id="majorHeader"><p>' + currentDay + '</p></div>'
-    document.querySelector("main").insertAdjacentHTML('beforeend', content);
-}
 
 function makeChoice(choiceCode, rawValue = "0p0s") {
     if (choiceCode.startsWith("random")) {
@@ -41,26 +36,18 @@ function makeChoice(choiceCode, rawValue = "0p0s") {
         } else {
             choiceCode = choiceCode.split(" ")[2];
         }
-    }
-
-    if (choiceCode.startsWith("ending")) {
+    } else if (choiceCode.startsWith("ending")) {
         endingChoice(choiceCode);
         return;
-    }
-
-    if (choiceCode.startsWith("new day")) {
+    } else if (choiceCode.startsWith("newDay")) {
         displayDay();
-        choiceCode = "1A";
+        return;
     }
 
     var eventElement = document.querySelector("#event > p:first-of-type"); // Selects the event description thing
     var choicesElement = document.querySelector("#choices"); // Selects the choices article
 
-    var firstChild = choicesElement.firstElementChild;
-    while (firstChild) {
-        firstChild.remove();
-        firstChild = choicesElement.firstElementChild;
-    }
+    clearScreen();
 
     var eventText = choiceData[choiceCode].flavourText; // Gets flavour text of question
     var choiceOptions = choiceData[choiceCode].choices; // Gets choices of question
@@ -73,14 +60,53 @@ function makeChoice(choiceCode, rawValue = "0p0s") {
         choicesElement.insertAdjacentHTML('beforeend', content);
     }
 
-    addWantedValue(rawValue);
+    changeWantedValue(rawValue);
 
     if (wantedValue[0] !== 0 || wantedValue[1] !== 0) {
         updateWantedValue();
     } 
 }
 
-function addWantedValue(rawValue) {
+function clearScreen(hideTalker = false) {
+    var firstChild = document.querySelector("#choices").firstElementChild;
+    var majorHeader = document.querySelector("#majorHeader");
+    var eventElement = document.querySelector("#event > p:first-of-type")
+
+    if (hideTalker) {
+        document.querySelector("#event > div:first-of-type").classList.add("hidden");
+    } else {
+        document.querySelector("#event > div:first-of-type").classList.remove("hidden");
+    }
+
+    while (firstChild) {
+        firstChild.remove();
+        firstChild = document.querySelector("#choices").firstElementChild;
+    }
+
+    eventElement.innerHTML = "";
+
+    try {
+        majorHeader.remove();
+    } catch (TypeError) {
+        // Ignore
+    }
+}
+
+function displayDay() {
+    clearScreen(true);
+
+    currentDay += 1;
+    var dayNotifElement = '<div id="majorHeader"><p>Day ' + currentDay + '</p></div>';
+    var dayCountElement = document.querySelector("#day");
+    var choicesElement = document.querySelector("#choices");
+    var choicesContent = '<a class="choiceButton" onClick="makeChoice(\'1A\', \'0p0s\')">Wake Up</a>';
+
+    dayCountElement.innerHTML = currentDay;
+    document.querySelector("main").insertAdjacentHTML('afterbegin', dayNotifElement);
+    choicesElement.insertAdjacentHTML('beforeend', choicesContent);
+}
+
+function changeWantedValue(rawValue) {
     try {
         var poundValue = Number(rawValue.toString().split("p")[0]); // Extracts crime value in pounds, as a number
     } catch(TypeError) {
@@ -130,6 +156,29 @@ function endingChoice(choiceCode) {
         document.querySelector("main").insertAdjacentHTML('beforeend', content);
     }
 }
+
+function spendMoney(target) {
+    var marker = document.querySelector("." + CSS.escape(target) + " p:first-of-type");
+    var button = document.querySelector("." + CSS.escape(target) + " a:first-of-type");
+
+    marker.classList.add("bought");
+    marker.innerHTML = "Bought";
+
+    button.innerHTML = 'Sell ' + target ;
+    button.setAttribute('onClick', 'unspendMoney(\'' + target + '\')');
+}
+
+function unspendMoney(target) {
+    var marker = document.querySelector("." + CSS.escape(target) + " p:first-of-type");
+    var button = document.querySelector("." + CSS.escape(target) + " a:first-of-type");
+
+    marker.classList.remove("bought");
+    marker.innerHTML = "Not bought";
+
+    button.innerHTML = 'Buy ' + target ;
+    button.setAttribute('onClick', 'spendMoney(\'' + target + '\')');
+}
+
 function iterateRecords(results) {
 
 	console.log(results);

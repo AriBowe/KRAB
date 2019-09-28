@@ -94,6 +94,9 @@ main {
 
 #choices {
 	flex: 0;
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
 }
 
 #statusBar {
@@ -139,6 +142,14 @@ main {
 	margin-bottom: 0.5em;
 }
 
+.hidden {
+	display: none;
+}
+
+.hidden * {
+	display: none;
+}
+
 #event {
 	text-align: center;
 	display: flex;
@@ -177,12 +188,6 @@ main {
 	padding: 2%;
 }
 
-main article:nth-of-type(2) {
-	display: flex;
-	justify-content: space-around;
-	width: 100%;
-}
-
 .choiceButton {
 	font-size: 30px;
 	text-decoration: none;
@@ -206,6 +211,39 @@ main article:nth-of-type(2) {
 	/* Fades when button values change, less jarring to look at */
 	-webkit-transition: background-color 0.6s, color 0.6s;
   	transition: background-color 0.6s, color 0.6s;
+}
+
+.endOfDay {
+	flex: 0;
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 50%;
+}
+
+.purchase {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.5em;
+	width: 100%;
+}
+
+.purchase * {
+	flex: 1;
+	margin: 0.25em;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.purchase p {
+	color: red;
+}
+
+.purchase p.bought {
+	color: black;
 }
 
 /* SIDEBAR CSS */
