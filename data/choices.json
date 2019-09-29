@@ -5,12 +5,14 @@
             "1": {
                 "choiceText": "Pickpocket",
                 "outcomeCode": "2A",
-                "choiceValue": "2p"
+                "choiceValue": "2p",
+                "choiceEffect": "money"
             },
             "2": {
                 "choiceText": "Steal bread",
                 "outcomeCode": "2A",
-                "choiceValue": "1p"
+                "choiceValue": "1p",
+                "choiceEffect": "food"
             },
             "3": {
                 "choiceText": "Find a job",

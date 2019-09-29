@@ -52,6 +52,7 @@ function makeChoice(choiceCode, rawValue = "0p0s") {
     var eventText = choiceData[choiceCode].flavourText; // Gets flavour text of question
     var choiceOptions = choiceData[choiceCode].choices; // Gets choices of question
     var choicesNumber = (Object.keys(choiceOptions).length); // Gets the number of choices
+    console.log(choiceEffect)
 
     eventElement.innerHTML = eventText.toString(); // Fills out the event on the page
 
@@ -63,7 +64,7 @@ function makeChoice(choiceCode, rawValue = "0p0s") {
     changeWantedValue(rawValue);
 
     if (wantedValue[0] !== 0 || wantedValue[1] !== 0) {
-        updateWantedValue();
+        updateValues();
     } 
 }
 
@@ -106,7 +107,7 @@ function displayDay() {
     choicesElement.insertAdjacentHTML('beforeend', choicesContent);
 }
 
-function changeWantedValue(rawValue) {
+function decodeValues(rawValue) {
     try {
         var poundValue = Number(rawValue.toString().split("p")[0]); // Extracts crime value in pounds, as a number
     } catch(TypeError) {
@@ -123,20 +124,42 @@ function changeWantedValue(rawValue) {
         var shillingValue = 0;
     }
 
-    var currentShillingValue = wantedValue[1];
+    var currentShillingValue = currentSavings[1];
+
+    while (shillingValue < 0) {
+        poundValue -= 1;
+        shillingValue += 20;
+    }
 
     while (shillingValue + currentShillingValue >= 20) {
         poundValue += 1;
         shillingValue -= 20;
     }
 
-    wantedValue[0] += poundValue;
-    wantedValue[1] += shillingValue;
+    return [poundValue, shillingValue];
+}
+    
+
+function changeWantedValue(rawValue) {
+    var values = decodeValues(rawValue);
+
+    wantedValue[0] += values[0];
+    wantedValue[1] += values[1];
 }
 
-function updateWantedValue() {
+function changeSavings(rawValue) {
+    var values = decodeValues(rawValue);
+
+    currentSavings[0] += values[0];
+    currentSavings[1] += values[1];
+}
+
+
+function updateValues() {
     var wantedElement = document.querySelector("#wantedValue");
+    var savingsElement = document.querySelector("#savings");
     wantedElement.innerHTML = wantedValue[0].toString() + " pence, " + wantedValue[1].toString() + " shillings";
+    savingsElement.innerHTML = currentSavings[0].toString() + " pence, " + currentSavings[1].toString() + " shillings";
 }
 
 function endingChoice(choiceCode) {
@@ -157,26 +180,56 @@ function endingChoice(choiceCode) {
     }
 }
 
-function spendMoney(target) {
+function canAfford(rawCost) {
+    var values = decodeValues(rawCost);
+    var newValues = [currentSavings[0] - values[0], currentSavings[1] - values[1]];
+
+    while (newValues[1] > 0) {
+        newValues[0] -= 1;
+        newValues[1] += 20;
+    }
+
+    if (newValues[0] >= 0 && newValues[1] >= 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function spendMoney(target, cost) {
+    var statusBar = document.querySelector("#statusBar");
     var marker = document.querySelector("." + CSS.escape(target) + " p:first-of-type");
     var button = document.querySelector("." + CSS.escape(target) + " a:first-of-type");
+
+    if (!canAfford(cost)) {
+        alert("You cannot afford this!")
+        return;
+    }
+
+    changeSavings("-" + cost);
 
     marker.classList.add("bought");
     marker.innerHTML = "Bought";
 
     button.innerHTML = 'Sell ' + target ;
-    button.setAttribute('onClick', 'unspendMoney(\'' + target + '\')');
+    button.setAttribute('onClick', "unspendMoney('" + target + "','" + cost + "')");
+
+    updateValues();
 }
 
-function unspendMoney(target) {
+function unspendMoney(target, cost) {
     var marker = document.querySelector("." + CSS.escape(target) + " p:first-of-type");
     var button = document.querySelector("." + CSS.escape(target) + " a:first-of-type");
+
+    changeSavings(cost);
 
     marker.classList.remove("bought");
     marker.innerHTML = "Not bought";
 
     button.innerHTML = 'Buy ' + target ;
-    button.setAttribute('onClick', 'spendMoney(\'' + target + '\')');
+    button.setAttribute('onClick', "spendMoney('" + target + "','" + cost + "')");
+
+    updateValues();
 }
 
 function iterateRecords(results) {
