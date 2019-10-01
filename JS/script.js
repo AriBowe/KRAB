@@ -29,6 +29,10 @@ var currentDay = 0;
 var currentSavings = [0, 0];
 
 
+function chooseCharacter() {
+
+}
+
 function makeChoice(choiceCode, rawValue = "0p0s") {
     if (choiceCode.startsWith("random")) {
         if (Math.random() < 0.5) {
@@ -197,7 +201,6 @@ function canAfford(rawCost) {
 }
 
 function spendMoney(target, cost) {
-    var statusBar = document.querySelector("#statusBar");
     var marker = document.querySelector("." + CSS.escape(target) + " p:first-of-type");
     var button = document.querySelector("." + CSS.escape(target) + " a:first-of-type");
 
@@ -291,6 +294,26 @@ $(document).ready(function() {
         success: function(results) {
             window.convictData = results; // Global variable
             iterateRecords(results);
+            }
+        
+    });
+
+    var random = Math.floor((Math.random() * 10) + 1);
+
+    var characterChoicesSearch = {
+        resource_id: "dbcfa4a6-3ec7-4264-bcee-43b21a470d34",
+        limit: 3,
+        q: random,
+    }
+
+    $.ajax({
+        url: "https://data.qld.gov.au/api/3/action/datastore_search",
+        data: characterChoicesSearch,
+        dataType: "jsonp", // We use "jsonp" to ensure AJAX works correctly locally (otherwise it'll be blocked due to cross-site scripting).
+        cache: true,
+        success: function(results) {
+            window.characterChoices = results; // Global variable
+            console.log(characterChoices);
             }
         
     });
