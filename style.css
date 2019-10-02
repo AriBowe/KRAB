@@ -144,10 +144,16 @@ main {
 
 .hidden {
 	display: none;
+	flex: 0;
+	height: 0px;
+	width: 0px;
 }
 
 .hidden * {
 	display: none;
+	flex: 0;
+	height: 0px;
+	width: 0px;
 }
 
 #event {

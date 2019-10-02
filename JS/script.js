@@ -30,10 +30,15 @@ var currentSavings = [0, 0];
 
 
 function chooseCharacter() {
-
+    var choiceOne = characterChoices.result.records[0];
+    var choiceTwo = characterChoices.result.records[1];
+    var choiceThree = characterChoices.result.records[2];
+    console.log(choiceOne);
+    console.log(choiceTwo);
+    console.log(choiceThree);
 }
 
-function makeChoice(choiceCode, rawValue = "0p0s") {
+function makeChoice(choiceCode, rawValue = "0p0s", choiceEffect = "none") {
     if (choiceCode.startsWith("random")) {
         if (Math.random() < 0.5) {
             choiceCode = choiceCode.split(" ")[1];
@@ -56,7 +61,8 @@ function makeChoice(choiceCode, rawValue = "0p0s") {
     var eventText = choiceData[choiceCode].flavourText; // Gets flavour text of question
     var choiceOptions = choiceData[choiceCode].choices; // Gets choices of question
     var choicesNumber = (Object.keys(choiceOptions).length); // Gets the number of choices
-    console.log(choiceEffect)
+    console.log(choiceEffect);
+    applyEffect(choiceEffect);
 
     eventElement.innerHTML = eventText.toString(); // Fills out the event on the page
 
@@ -70,6 +76,10 @@ function makeChoice(choiceCode, rawValue = "0p0s") {
     if (wantedValue[0] !== 0 || wantedValue[1] !== 0) {
         updateValues();
     } 
+}
+
+function applyEffect(choiceEffect) {
+    return;
 }
 
 function clearScreen(hideTalker = false) {
