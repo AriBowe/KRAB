@@ -1,6 +1,6 @@
 <div id="statusBar">
-    <p id="characterName">Test McTest</p>
+    <p id="characterName">Not chosen</p>
     <p id="day">1</p>
     <p id="savings">No savings</p>
-    <p id="wantedValue">Not Wanted</p>
+    <p id="wantedValue">Not wanted</p>
 </div>

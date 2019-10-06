@@ -22,11 +22,15 @@ function toggle_sidebar() {
 
 // --- MAIN GAME CODE --- //
 // Initialise variables
-var wantedValue = [0, 0]; // Wanted value in pounds and shillings
-var playerName = "placeholder name"; // TODO: Pull this from SLQ data
-var dateOfDeath = "1/1/1 - placeholder"; // TODO: Pull this from SLQ data as well
-var currentDay = 0;
-var currentSavings = [0, 0];
+var wantedValue = [0, 0];                   // Wanted value in pounds and shillings
+var playerName = "placeholder name";        // Player character name
+var dateOfDeath = "1/1/1 - placeholder";    // Date the convict died
+var currentDay = 0;                         // The current day, as number of days from the start
+var currentSavings = [0, 0];                // The player's current savings, as [pounds, shillings] where 20 shillings == one pound
+var hasFood = false                         // Does the player have food for the night?
+var lastFood = 0                            // How many days ago did the player have food for the night?
+var hasHeat = false                         // Does the player have heat for the night? (Firewood)
+var lastHeat = 0                            // How many days ago did the player have heat for the night?
 
 
 function chooseCharacter() {
@@ -36,6 +40,8 @@ function chooseCharacter() {
     console.log(choiceOne);
     console.log(choiceTwo);
     console.log(choiceThree);
+
+
 }
 
 function makeChoice(choiceCode, rawValue = "0p0s", choiceEffect = "none") {
@@ -88,9 +94,9 @@ function clearScreen(hideTalker = false) {
     var eventElement = document.querySelector("#event > p:first-of-type")
 
     if (hideTalker) {
-        document.querySelector("#event > div:first-of-type").classList.add("hidden");
+        document.querySelector("#event").classList.add("hidden");
     } else {
-        document.querySelector("#event > div:first-of-type").classList.remove("hidden");
+        document.querySelector("#event").classList.remove("hidden");
     }
 
     while (firstChild) {
@@ -107,18 +113,50 @@ function clearScreen(hideTalker = false) {
     }
 }
 
+function endOfDay() {
+    clearScreen(true);
+
+    var choicesElement = document.querySelector("#choices");
+    var content = '<a class="choiceButton" onClick="makeChoice(\'newDay\')">Go home</a>';
+    choicesElement.insertAdjacentHTML('beforeend', content);
+
+    document.querySelector("#endOfDay").classList.remove("hidden");
+}
+
 function displayDay() {
     clearScreen(true);
 
     currentDay += 1;
+
+    if (hasFood) {
+        lastFood = 1
+    } else {
+        lastFood += 1
+    }
+    if (hasHeat) {
+        lastHeat = 1
+    } else {
+        lastHeat += 1
+    }
+
+    if (lastHeat > 2) {
+        endOfGame("food")
+    } else if (lastHeat > 2) {
+        endOfGame("heat")
+    }
+
+    hasFood = false;
+    hasHeat = false;
+
     var dayNotifElement = '<div id="majorHeader"><p>Day ' + currentDay + '</p></div>';
-    var dayCountElement = document.querySelector("#day");
     var choicesElement = document.querySelector("#choices");
     var choicesContent = '<a class="choiceButton" onClick="makeChoice(\'1A\', \'0p0s\')">Wake Up</a>';
 
-    dayCountElement.innerHTML = currentDay;
     document.querySelector("main").insertAdjacentHTML('afterbegin', dayNotifElement);
     choicesElement.insertAdjacentHTML('beforeend', choicesContent);
+    document.querySelector("#endOfDay").classList.add("hidden");
+
+    updateValues();
 }
 
 function decodeValues(rawValue) {
@@ -170,20 +208,23 @@ function changeSavings(rawValue) {
 
 
 function updateValues() {
+    var dayCountElement = document.querySelector("#day");
     var wantedElement = document.querySelector("#wantedValue");
     var savingsElement = document.querySelector("#savings");
+
+    dayCountElement.innerHTML = currentDay;
     wantedElement.innerHTML = wantedValue[0].toString() + " pence, " + wantedValue[1].toString() + " shillings";
     savingsElement.innerHTML = currentSavings[0].toString() + " pence, " + currentSavings[1].toString() + " shillings";
 }
 
-function endingChoice(choiceCode) {
+function endOfGame(endingCode) {
     var eventElement = document.querySelector("#event > p:first-of-type"); // Selects the event description thing
     var choicesElement = document.querySelector("#choices"); // Selects the choices article
 
     eventElement.remove();
     choicesElement.remove();
 
-    var fieldsOptions = choiceData[choiceCode].fields; // Gets fields of question
+    var fieldsOptions = choiceData[endingCode].fields; // Gets fields of question
     var fieldsNumber = (Object.keys(fieldsOptions).length); // Gets the number of fields
 
     wantedValue = String(wantedValue[0]) + " pence, " + String(wantedValue[1]) + " shillings";
@@ -198,7 +239,7 @@ function canAfford(rawCost) {
     var values = decodeValues(rawCost);
     var newValues = [currentSavings[0] - values[0], currentSavings[1] - values[1]];
 
-    while (newValues[1] > 0) {
+    while (newValues[1] < 0) {
         newValues[0] -= 1;
         newValues[1] += 20;
     }
@@ -224,6 +265,8 @@ function spendMoney(target, cost) {
     marker.classList.add("bought");
     marker.innerHTML = "Bought";
 
+    window["has" + target] = true;
+
     button.innerHTML = 'Sell ' + target ;
     button.setAttribute('onClick', "unspendMoney('" + target + "','" + cost + "')");
 
@@ -239,11 +282,15 @@ function unspendMoney(target, cost) {
     marker.classList.remove("bought");
     marker.innerHTML = "Not bought";
 
+    window["has" + target] = false;
+
     button.innerHTML = 'Buy ' + target ;
     button.setAttribute('onClick', "spendMoney('" + target + "','" + cost + "')");
 
     updateValues();
 }
+
+// --- Hall of fame functions --- //
 
 function iterateRecords(results) {
 
@@ -289,6 +336,9 @@ function iterateRecords(results) {
 
 }
 
+
+// --- Data collection & loading --- // 
+
 $(document).ready(function() {
 
     var convictDataSearch = {
@@ -333,6 +383,14 @@ $(document).ready(function() {
         dataType: "json",
         success: function(results) {
             window.choiceData = results; // Global variable
+        }
+    });
+
+    $.ajax({
+        url: "data/ending.json",
+        dataType: "json",
+        success: function(results) {
+            window.endingData = results; // Global variable
         }
     });
 

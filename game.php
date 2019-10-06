@@ -16,13 +16,13 @@ include 'statusbar.php';
     <div id="choices">
         <a class="choiceButton" onClick="makeChoice('newDay')">Begin game</a>
     </div>
-    <div class="endOfDay hidden">
-        <div class="purchase food">
-            <a class="choiceButton" onClick="spendMoney('food','4p')">Buy food</a>
+    <div id="endOfDay" class="hidden">
+        <div class="purchase Food">
+            <a class="choiceButton" onClick="spendMoney('Food','4p')">Buy food</a>
             <p>Not bought</p>
         </div>
-        <div class="purchase heat">
-            <a class="choiceButton" onClick="spendMoney('heat','2p')">Buy firewood</a>
+        <div class="purchase Heat">
+            <a class="choiceButton" onClick="spendMoney('Heat','2p')">Buy firewood</a>
             <p>Not bought</p>
         </div>
     </div> 
