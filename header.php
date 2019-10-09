@@ -12,7 +12,7 @@
 
 	<body>
 		<header>
-			<p>CONVICTED!</p>
+			<h1><a href="/index.php">CONVICTED!</a></h1>
 			
 			<div id="open">
 				<button class="openbtn" onclick="toggle_sidebar()">&#9776; </button> 
