@@ -21,7 +21,7 @@ include 'sidebar.php';
 					</div>
                 
 				<section id="submit">
-				<a href="#">SUBMIT</a>
+				<a href="/contact.php">SUBMIT</a>
             </section>
  
         </form>
