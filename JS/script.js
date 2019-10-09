@@ -268,12 +268,12 @@ function spendMoney(target, cost) {
     window["has" + target] = true;
 
     button.innerHTML = 'Sell ' + target ;
-    button.setAttribute('onClick', "unspendMoney('" + target + "','" + cost + "')");
+    button.setAttribute('onClick', "gainMoney('" + target + "','" + cost + "')");
 
     updateValues();
 }
 
-function unspendMoney(target, cost) {
+function gainMoney(target, cost) {
     var marker = document.querySelector("." + CSS.escape(target) + " p:first-of-type");
     var button = document.querySelector("." + CSS.escape(target) + " a:first-of-type");
 

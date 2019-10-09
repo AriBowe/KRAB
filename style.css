@@ -3,7 +3,7 @@
 }
 
 body {
-	font-family: 'EB Garamond', serif;
+	font-family: 'Merriweather', serif;
 	font-size: 21px;
 	line-height: 1.5em;
 	color: black;
@@ -21,8 +21,9 @@ body {
 /* HEADER CSS */
 
 header {
+	font-family: 'Fredericka the Great', serif;
 	background: #533527;
-	font-size: 2em;
+	font-size: 1.75em;
 	color: white;
 	display: flex;
 	width: 90vw;
@@ -38,7 +39,6 @@ header h1 {
 	/* line-height: 1.5em; */
 	color: white;
 	text-align: left;
-	font-style: italic;
 }
 
  /* The button used to open the sidebar */
@@ -71,6 +71,7 @@ header h1 {
 
 /* MAIN CONTENT CSS */
 
+
 main {
 	overflow: auto;
 	background: none;
@@ -90,6 +91,7 @@ main {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font-family: 'Fredericka the Great', serif;
 }
 
 #choices {
