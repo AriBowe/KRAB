@@ -14,9 +14,8 @@ include 'statusbar.php';
         <p>You're a poor Englishman in the 19th century. Click the buttons below to make decisions and go about your day.</p>
     </div>
     <div id="choices">
-        <a class="choiceButton" onClick="makeChoice('newDay')">Begin game</a>
     </div>
-    <div id="endOfDay" class="hidden">
+    <div id="endOfDay">
         <div class="purchase Food">
             <a class="choiceButton" onClick="spendMoney('Food','4p')">Buy food</a>
             <p>Not bought</p>
@@ -26,6 +25,14 @@ include 'statusbar.php';
             <p>Not bought</p>
         </div>
     </div> 
+    <div id="characterSelect">
+        <div class="characterOption">
+            <h2 class="characterName"></h2>
+            <img class="characterImage" src="">
+            <p class="startingMoney"></p>
+            <a class="choiceButton" onClick="chooseCharacter()"></a>
+        </div>
+    </div>
 </main>
 
 <?php 
