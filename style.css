@@ -90,6 +90,42 @@ main {
 	flex: 1;
 }
 
+#characterSelect {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+}
+
+#characterSelect a {
+	background-color: white;
+	width: 90%;
+}
+
+#characterSelect a:hover {
+	background-color: #533527;
+}
+
+.characterOption {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-direction: column;
+	background-color: rgba(83, 53, 39, 0.4);
+	border-radius: 3vh;
+	padding: 3vh;
+	font-size: 0.75em;
+}
+
+.characterOption * {
+	padding: 1vh;
+	border-radius: 3vh;
+}
+
+.characterOption img {
+	height: 40vh;
+}
+
 #majorHeader {
 	width: 100%;
 	font-size: 48px;

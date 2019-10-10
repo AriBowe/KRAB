@@ -27,10 +27,22 @@ include 'statusbar.php';
     </div> 
     <div id="characterSelect">
         <div class="characterOption">
-            <h2 class="characterName"></h2>
-            <img class="characterImage" src="">
-            <p class="startingMoney"></p>
-            <a class="choiceButton" onClick="chooseCharacter()"></a>
+            <h2 class="characterName">Bob Bobbings</h2>
+            <img class="characterImage" src="Images/no_profile.jpg">
+            <p class="startingMoney">Savings: 2 pounds, 3 shillings</p>
+            <a class="choiceButton" onClick="chooseCharacter()">Select</a>
+        </div>
+        <div class="characterOption">
+            <h2 class="characterName">Bob Bobbings</h2>
+            <img class="characterImage" src="Images/no_profile.jpg">
+            <p class="startingMoney">Savings: 2 pounds, 3 shillings</p>
+            <a class="choiceButton" onClick="chooseCharacter()">Select</a>
+        </div>
+        <div class="characterOption">
+            <h2 class="characterName">Bob Bobbings</h2>
+            <img class="characterImage" src="Images/no_profile.jpg">
+            <p class="startingMoney">Savings: 2 pounds, 3 shillings</p>
+            <a class="choiceButton" onClick="chooseCharacter()">Select</a>
         </div>
     </div>
 </main>

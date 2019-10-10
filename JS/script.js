@@ -46,7 +46,7 @@ function characterSelect() {                // Character selection
         characterOptionWorking.appendTo("#characterSelect");
         
         $("#character" + i + " h2").html(characterName);
-        $("#character" + i + " .startingMoney").html(startingMoney[0] + "p, " + startingMoney[1] + "s");
+        $("#character" + i + " .startingMoney").html("Savings: " + startingMoney[0] + " pence, " + startingMoney[1] + " shillings");
         $("#character" + i + " .choicebutton").innerHTML("chooseCharacter(" + i + ", " + startingMoney + ")");
     }
 }
@@ -432,24 +432,24 @@ $(document).ready(function() {
         }
     });
 
-    // Load templates
-    window.eventElement = $("#event").clone();
-    window.choicesElement = $("#choices").clone();
-    window.endOfDayElement = $("#endOfDay").clone();
-    window.characterOption = $(".characterOption").clone();
+    // // Load templates
+    // window.eventElement = $("#event").clone();
+    // window.choicesElement = $("#choices").clone();
+    // window.endOfDayElement = $("#endOfDay").clone();
+    // window.characterOption = $(".characterOption").clone();
 
     // Remove the initial templates
     document.querySelector("#event").remove();
     document.querySelector("#choices").remove();
     document.querySelector("#endOfDay").remove();
-    document.querySelector(".characterOption").remove();
+    // document.querySelector(".characterOption").remove();
 
-    // Need to load characterSelect after removing it's inner options
-    window.characterSelectElement = $("#characterSelect").clone();
-    document.querySelector("#characterSelect").remove();
+    // // Need to load characterSelect after removing it's inner options
+    // window.characterSelectElement = $("#characterSelect").clone();
+    // document.querySelector("#characterSelect").remove();
 
     console.log("Removed templates");
 
-    characterSelect();
+    // characterSelect();
 });
 
