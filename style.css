@@ -80,7 +80,7 @@ header a {
 main {
 	overflow: auto;
 	background: none;
-	width: 70vw;
+	width: 80vw;
 	font-size: 1.5em;
 	line-height: 5vh;
 	display: flex;
@@ -95,6 +95,8 @@ main {
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
+	flex-flow: wrap;
+	height: 100%;
 }
 
 #characterSelect a {
@@ -113,8 +115,11 @@ main {
 	flex-direction: column;
 	background-color: rgba(83, 53, 39, 0.4);
 	border-radius: 3vh;
-	padding: 3vh;
+	padding: 2vh;
+	margin: 1vh;
 	font-size: 0.75em;
+	max-width: 20vw;
+	max-height: 90%;
 }
 
 .characterOption * {
@@ -123,7 +128,7 @@ main {
 }
 
 .characterOption img {
-	height: 40vh;
+	height: 30vh;
 }
 
 #majorHeader {
@@ -179,7 +184,7 @@ main {
 }
 
 #statusBar p {
-	margin-left: 2em;
+	margin-left: 1em;
 	margin-right: 2em;
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
@@ -342,7 +347,7 @@ main {
 	width: 20vw;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
 	.open {
 		width: 50vw;
 	}
@@ -360,12 +365,34 @@ main {
 		white-space: normal;
 	}
 
+	main {
+		width: 90vw;
+	}
+
+	.characterOption {
+		font-size: 0.6em;
+	}
+
+	.characterOption img {
+		height: 20vh;
+	}
+
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
 	.open {
 		width: 80vw;
 		padding: 10vw;
+	}
+
+	#characterSelect {
+		flex-direction: column;
+		flex-wrap: nowrap;
+		justify-content: flex-start;
+	}
+
+	.characterOption {
+		max-width: 70vw;
 	}
 }
   

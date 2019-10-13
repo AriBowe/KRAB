@@ -48,6 +48,7 @@ function characterSelect() {                // Character selection
         $("#character" + i + " h2").html(characterName);
         $("#character" + i + " .startingMoney").html("Savings: " + startingMoney[0] + " pence, " + startingMoney[1] + " shillings");
         $("#character" + i + " .choicebutton").innerHTML("chooseCharacter(" + i + ", " + startingMoney + ")");
+        console.log("Generated character")
     }
 }
 
@@ -84,19 +85,17 @@ function makeChoice(choiceCode, rawValue = "0p0s", choiceEffect = "none") {
         return;
     }
 
+    clearScreen();
+
     eventElement.appendTo("main");
     choicesElement.appendTo("main")
 
     var eventSelector = document.querySelector("#event > p:first-of-type"); // Selects the event description thing
     var choicesSelector = document.querySelector("#choices"); // Selects the choices article
 
-    clearScreen();
-
     var eventText = choiceData[choiceCode].flavourText; // Gets flavour text of question
     var choiceOptions = choiceData[choiceCode].choices; // Gets choices of question
     var choicesNumber = (Object.keys(choiceOptions).length); // Gets the number of choices
-    console.log(choiceEffect);
-    applyEffect(choiceEffect);
 
     eventSelector.innerHTML = eventText.toString(); // Fills out the event on the page
 
@@ -117,6 +116,16 @@ function applyEffect(choiceEffect) {
 }
 
 function clearScreen() {
+    try {
+        var childElement = document.querySelector("#choices").firstChild();
+        while (childElement) {
+            childElement.remove();
+            childElement = document.querySelector("#choices").firstChild();
+        }
+    } catch (TypeError) {
+        // Ignore
+    }
+
     try {
         document.querySelector("#event").remove();
     } catch (TypeError) {
@@ -192,7 +201,6 @@ function displayDay() {
 
     document.querySelector("main").insertAdjacentHTML('afterbegin', dayNotifElement);
     choicesSelector.insertAdjacentHTML('beforeend', choicesContent);
-    document.querySelector("#endOfDay").classList.add("hidden");
 
     updateValues();
 }
@@ -432,24 +440,24 @@ $(document).ready(function() {
         }
     });
 
-    // // Load templates
-    // window.eventElement = $("#event").clone();
-    // window.choicesElement = $("#choices").clone();
-    // window.endOfDayElement = $("#endOfDay").clone();
-    // window.characterOption = $(".characterOption").clone();
+    // Load templates
+    window.eventElement = $("#event").clone();
+    window.choicesElement = $("#choices").clone();
+    window.endOfDayElement = $("#endOfDay").clone();
+    window.characterOption = $(".characterOption").clone();
 
     // Remove the initial templates
     document.querySelector("#event").remove();
     document.querySelector("#choices").remove();
     document.querySelector("#endOfDay").remove();
-    // document.querySelector(".characterOption").remove();
+    document.querySelector(".characterOption").remove();
 
     // // Need to load characterSelect after removing it's inner options
-    // window.characterSelectElement = $("#characterSelect").clone();
-    // document.querySelector("#characterSelect").remove();
+    window.characterSelectElement = $("#characterSelect").clone();
+    document.querySelector("#characterSelect").remove();
 
     console.log("Removed templates");
 
-    // characterSelect();
+    characterSelect();
 });
 
