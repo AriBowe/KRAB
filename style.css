@@ -117,7 +117,7 @@ main {
 	border-radius: 3vh;
 	padding: 2vh;
 	margin: 1vh;
-	font-size: 0.75em;
+	font-size: 0.65em;
 	max-width: 20vw;
 	max-height: 90%;
 }
@@ -426,7 +426,7 @@ footer {
 
 .record {
 	display: block;
-	width: 10%;
+	width: 9.5%;
 	height: 270px;
 	padding: 5em;
 	background-image: url("images/poster.jpg");
@@ -479,6 +479,11 @@ input[type=text]:focus {
 	color: rgb(83,53,39);
 }
 
+#contact-form h2 {
+	font-family: 'Fredericka the Great', serif;
+	font-size: 1.65em;
+	color: rgb(83,53,39);
+}
 #submit a {
 	font-size: 20px;
 	text-decoration: none;
@@ -492,7 +497,7 @@ input[type=text]:focus {
 
 #submit a:hover { 
 	color: white;
-	background-color:  rgb(83,53,39);
+	background-color: rgb(83,53,39);
 }
 
 #submit a:active {
