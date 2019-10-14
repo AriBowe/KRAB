@@ -7,7 +7,7 @@ include 'statusbar.php';
 ?>
 <main>
     <div id="event">
-        <div>   
+        <div id="character">   
             <img src="Images/no_profile.jpg" alt="">
             <h2>Character Name</h2>
         </div>
