@@ -24,7 +24,7 @@ function toggle_sidebar() {
 // Initialise variables
 var wantedValue = [0, 0];                   // Wanted value in pounds and shillings
 var playerName = "placeholder name";        // Player character name
-var dateOfDeath = "1/1/1 - placeholder";    // Date the convict died
+var dateOfDepature = "1/1/1 - placeholder";    // Date the convict died
 var currentDay = 0;                         // The current day, as number of days from the start
 var currentSavings = [0, 0];                // The player's current savings, as [pounds, shillings] where 20 shillings == one pound
 var hasFood = false                         // Does the player have food for the night?
@@ -36,36 +36,41 @@ var lastHeat = 0                            // How many days ago did the player 
 
 function characterSelect() {                // Character selection
     characterSelectElement.appendTo("main")
-    for (i = 1; i <= 3; i++) {
-        var characterOptionWorking = characterOption;
+    for (i = 0; i <= 2; i+=1) {
+        var characterOptionWorking = characterOption.clone();
         characterOptionWorking.attr("id", "character" + i)
 
-        var characterName = characterChoices.result.records[i].recordName;
+        var characterName = characterChoices.result.records[i]["Convict Name"];
+        characterName = characterName.split(", ")[1].split(".")[0] + " " + characterName.split(", ")[0];
         var startingMoney = [Math.round(Math.random()*3), Math.round(Math.random()*5)];
 
         characterOptionWorking.appendTo("#characterSelect");
         
         $("#character" + i + " h2").html(characterName);
         $("#character" + i + " .startingMoney").html("Savings: " + startingMoney[0] + " pence, " + startingMoney[1] + " shillings");
-        $("#character" + i + " .choicebutton").innerHTML("chooseCharacter(" + i + ", " + startingMoney + ")");
+        $("#character" + i + " .choiceButton").attr("onClick", "chooseCharacter(" + i + ", [" + startingMoney + "])");
         console.log("Generated character")
     }
 }
 
 function chooseCharacter(number, startingMoney) {
     clearScreen();
-    var playerData = characterChoices.result.records[number];
+    var playerData = characterChoices.result.records[Number(number)];
 
     // NOTE: Didn't have internet when I wrote these, need to check that the field names are correct
-    playerName = playerData.recordName;
-    dateOfDeath = playerData.dateOfDeath;
+    playerName = playerData["Convict Name"];
+    playerName = playerName.split(", ")[1].split(".")[0] + " " + playerName.split(", ")[0];
+    console.log(playerName);
+    dateOfDepature = playerData["Date of Departure"];
     currentSavings = startingMoney;
     updateValues();
 
     choicesElement.appendTo("main");
 
+    document.querySelector("#characterName").innerHTML = playerName;
+
     var choicesSelector = document.querySelector("#choices")
-    var content = '<a class="choiceButton" onClick="makeChoice(\'newDay\')">Wake up</a>';
+    var content = '<a class="choiceButton" onClick="makeChoice(\'newDay\')">Begin Game</a>';
 
     choicesSelector.insertAdjacentHTML('beforeend', content);
 }
@@ -91,12 +96,14 @@ function makeChoice(choiceCode, rawValue = "0p0s", choiceEffect = "none") {
     choicesElement.appendTo("main")
 
     var eventSelector = document.querySelector("#event > p:first-of-type"); // Selects the event description thing
+    var eventDetailsSelector = document.querySelector("#event > div:first-of-type")
     var choicesSelector = document.querySelector("#choices"); // Selects the choices article
 
     var eventText = choiceData[choiceCode].flavourText; // Gets flavour text of question
     var choiceOptions = choiceData[choiceCode].choices; // Gets choices of question
     var choicesNumber = (Object.keys(choiceOptions).length); // Gets the number of choices
 
+    eventDetailsSelector.childNodes[1].innerHTML = choiceOptions[i].speaker // Fills out the speaker details
     eventSelector.innerHTML = eventText.toString(); // Fills out the event on the page
 
     for (i = 1; i <= choicesNumber; i++) {
@@ -117,10 +124,10 @@ function applyEffect(choiceEffect) {
 
 function clearScreen() {
     try {
-        var childElement = document.querySelector("#choices").firstChild();
-        while (childElement) {
-            childElement.remove();
-            childElement = document.querySelector("#choices").firstChild();
+        var firstChild = document.querySelector("#choices").firstElementChild;
+        while (firstChild) {
+            firstChild.remove();
+            firstChild = document.querySelector("#choices").firstElementChild;
         }
     } catch (TypeError) {
         // Ignore
@@ -444,6 +451,10 @@ $(document).ready(function() {
     window.eventElement = $("#event").clone();
     window.choicesElement = $("#choices").clone();
     window.endOfDayElement = $("#endOfDay").clone();
+
+    // We only want one template of character
+    document.querySelector(".characterOption").remove();
+    document.querySelector(".characterOption").remove();
     window.characterOption = $(".characterOption").clone();
 
     // Remove the initial templates
@@ -451,13 +462,17 @@ $(document).ready(function() {
     document.querySelector("#choices").remove();
     document.querySelector("#endOfDay").remove();
     document.querySelector(".characterOption").remove();
+    
 
-    // // Need to load characterSelect after removing it's inner options
+    // Need to load characterSelect after removing it's inner options
     window.characterSelectElement = $("#characterSelect").clone();
     document.querySelector("#characterSelect").remove();
 
     console.log("Removed templates");
 
-    characterSelect();
+    setTimeout(function() {
+		console.log(characterChoices);
+        characterSelect();;
+    }, 1000);
 });
 
