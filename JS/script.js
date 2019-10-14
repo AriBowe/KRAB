@@ -86,7 +86,7 @@ function makeChoice(choiceCode, rawValue = "0p0s", choiceEffect = "none") {
         endingChoice(choiceCode);
         return;
     } else if (choiceCode.startsWith("newDay")) {
-        displayDay();
+        endOfDay();
         return;
     }
 

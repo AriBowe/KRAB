@@ -1,0 +1,99 @@
+{
+    "1A": {
+        "flavourText": "What should I do today?",
+        "speaker": ":name:",
+        "choices": {
+            "1": {
+                "choiceText": "Pick-pocket",
+                "outcomeCode": "2A",
+                "choiceValue": "0p0s"
+            },
+            "2": {
+                "choiceText": "Steal bread",
+                "outcomeCode": "2B",
+                "choiceValue": "0p0s"
+            },
+            "3": {
+                "choiceText": "Try and find a job",
+                "outcomeCode": "2C",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "2A": {
+        "flavourText": "After looking around for a time, you see a man walking along, not paying much attention. You snatch a pouch from his waist",
+        "speaker": ":none:",
+        "choices": {
+            "1": {
+                "choiceText": "Run",
+                "outcomeCode": "random 3A 3B",
+                "choiceValue": "2p0s"
+            }
+        }
+    },
+    "3A": {
+        "flavourText": "I managed to get away! Now let's look at the spoils",
+        "speaker": "{name}",
+        "choices": {
+            "1": {
+                "choiceText": "Open the pouch",
+                "outcomeCode": "4A",
+                "choiceValue": "0p0s",
+                "choiceEffect": "changeSavings('random')"
+            }
+        }
+    },
+    "4A": {
+        "flavourText": "It's getting late, I should head home",
+        "speaker": "{name}",
+        "choices": {
+            "1": {
+                "choiceText": "Go home",
+                "outcomeCode": "newDay",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "3B": {
+        "flavourText": "OI! You! Stop right there!",
+        "speaker": "Police Officer",
+        "choices": {
+            "1": {
+                "choiceText": "Run",
+                "outcomeCode": "random 3A ending1",
+                "choiceValue": "2p2s"
+            },
+            "2": {
+                "choiceText": "Fight",
+                "outcomeCode": "random 4B ending1",
+                "choiceValue": "5p"
+            },
+            "3": {
+                "choiceText": "Surrender yourself",
+                "outcomeCode": "ending 1",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "4B": {
+        "flavourText": "Hey, what are you-!?",
+        "speaker": "Police Officer",
+        "choices": {
+            "1": {
+                "choiceText": "Next",
+                "outcomeCode": "5A",
+                "choiceValue": "0p0s"
+            }
+        },
+    "5A": {
+        "flavourText": "I managed to knock him down, but I need to go!",
+        "speaker": ":name:",
+        "choices": {
+            "1": {
+                "choiceText": "Run",
+                "outcomeCode": "3A",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+}
