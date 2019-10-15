@@ -84,7 +84,8 @@
                 "outcomeCode": "5A",
                 "choiceValue": "0p0s"
             }
-        },
+        }
+    },
     "5A": {
         "flavourText": "I managed to knock him down, but I need to go!",
         "speaker": ":name:",
@@ -95,5 +96,5 @@
                 "choiceValue": "0p0s"
             }
         }
-    },
+    }
 }
