@@ -10,12 +10,33 @@
             },
             "2": {
                 "choiceText": "Steal bread",
-                "outcomeCode": "2B",
+                "outcomeCode": "random 2B 2C",
                 "choiceValue": "0p0s"
             },
             "3": {
-                "choiceText": "Try and find a job",
+                "choiceText": "Look for a job",
                 "outcomeCode": "2C",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "1B": {
+        "flavourText": "What should I do today?",
+        "speaker": ":name:",
+        "choices": {
+            "1": {
+                "choiceText": "Pick-pocket",
+                "outcomeCode": "2A",
+                "choiceValue": "0p0s"
+            },
+            "2": {
+                "choiceText": "Steal bread",
+                "outcomeCode": "random 2B 2C",
+                "choiceValue": "0p0s"
+            },
+            "3": {
+                "choiceText": "Go to work",
+                "outcomeCode": "4E",
                 "choiceValue": "0p0s"
             }
         }
@@ -31,26 +52,42 @@
             }
         }
     },
+    "2B": {
+        "flavourText": "You stop a woman leaving a bakery with a loaf of bread under her arm. You grab it from her and she screams",
+        "speaker": ":none:",
+        "choices": {
+            "1": {
+                "choiceText": "Run",
+                "outcomeCode": "random 3C 3D",
+                "choiceValue": "3p5s"
+            }
+        }
+    },
+    "2C": {
+        "flavourText": "Hmmm, I think the bakery is hiring",
+        "speaker": ":name:",
+        "choices": {
+            "1": {
+                "choiceText": "Go for a job",
+                "outcomeCode": "random 3E 3F",
+                "choiceValue": "0p0s"
+            },
+            "2": {
+                "choiceText": "Change your mind",
+                "outcomeCode": "1A",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
     "3A": {
         "flavourText": "I managed to get away! Now let's look at the spoils",
-        "speaker": "{name}",
+        "speaker": ":name:",
         "choices": {
             "1": {
                 "choiceText": "Open the pouch",
                 "outcomeCode": "4A",
                 "choiceValue": "0p0s",
-                "choiceEffect": "changeSavings('random')"
-            }
-        }
-    },
-    "4A": {
-        "flavourText": "It's getting late, I should head home",
-        "speaker": "{name}",
-        "choices": {
-            "1": {
-                "choiceText": "Go home",
-                "outcomeCode": "newDay",
-                "choiceValue": "0p0s"
+                "choiceEffect": "changeSavings random"
             }
         }
     },
@@ -60,17 +97,94 @@
         "choices": {
             "1": {
                 "choiceText": "Run",
-                "outcomeCode": "random 3A ending1",
-                "choiceValue": "2p2s"
+                "outcomeCode": "random 3A end1",
+                "choiceValue": "4p2s"
             },
             "2": {
                 "choiceText": "Fight",
-                "outcomeCode": "random 4B ending1",
-                "choiceValue": "5p"
+                "outcomeCode": "random 4B end1",
+                "choiceValue": "10p"
             },
             "3": {
                 "choiceText": "Surrender yourself",
-                "outcomeCode": "ending 1",
+                "outcomeCode": "end1",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "3C": {
+        "flavourText": "I managed to get away, but it's getting late",
+        "speaker": ":name:",
+        "choices": {
+            "1": {
+                "choiceText": "Head home",
+                "outcomeCode": "endOfDay",
+                "choiceValue": "0p0s",
+                "choiceEffect": "gain Food"
+            }
+        }
+    },
+    "3D": {
+        "flavourText": "Hey, what do you think you're doing?!",
+        "speaker": "Police Officer",
+        "choices": {
+            "1": {
+                "choiceText": "Run",
+                "outcomeCode": "random 4C end1",
+                "choiceValue": "4p2s"
+            },
+            "2": {
+                "choiceText": "Fight",
+                "outcomeCode": "random 4D end1",
+                "choiceValue": "8p11s"
+            },
+            "3": {
+                "choiceText": "Surrender yourself",
+                "outcomeCode": "end1",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "3E": {
+        "flavourText": "The head baker was skeptical, but he's willing to let me work the till for 3 pounds a day",
+        "speaker": ":name:",
+        "choices": {
+            "1": {
+                "choiceText": "Get to work",
+                "outcomeCode": "4E",
+                "choiceValue": "0p0s",
+                "choiceEffect": "gain Job"
+            }
+        }
+    },
+    "3F": {
+        "flavourText": "They weren't interested in me. Maybe I'll try tomorrow?",
+        "speaker": ":name:",
+        "choices": {
+            "1": {
+                "choiceText": "Pick-pocket",
+                "outcomeCode": "2A",
+                "choiceValue": "0p0s"
+            },
+            "2": {
+                "choiceText": "Steal bread",
+                "outcomeCode": "random 2B 2C",
+                "choiceValue": "0p0s"
+            },
+            "3": {
+                "choiceText": "Head home",
+                "outcomeCode": "endOfDay",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "4A": {
+        "flavourText": "It's getting late, I should head home",
+        "speaker": ":name:",
+        "choices": {
+            "1": {
+                "choiceText": "Go home",
+                "outcomeCode": "endOfDay",
                 "choiceValue": "0p0s"
             }
         }
@@ -82,6 +196,39 @@
             "1": {
                 "choiceText": "Next",
                 "outcomeCode": "5A",
+                "choiceValue": "10p0s"
+            }
+        }
+    },
+    "4C": {
+        "flavourText": "It's getting late, I should head home",
+        "speaker": ":name:",
+        "choices": {
+            "1": {
+                "choiceText": "Go home",
+                "outcomeCode": "endOfDay",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "4D": {
+        "flavourText": "I managed to fend him off, but I need to go!",
+        "speaker": ":name:",
+        "choices": {
+            "1": {
+                "choiceText": "Run",
+                "outcomeCode": "4C",
+                "choiceValue": "5p4s"
+            }
+        }
+    },
+    "4E": {
+        "flavourText": "Alright, just man the till for me while I'm working. If you try anything shifty I'll make sure you go straight to Australia!",
+        "speaker": "Head Baker",
+        "choices": {
+            "1": {
+                "choiceText": "Nod and get to work",
+                "outcomeCode": "5B",
                 "choiceValue": "0p0s"
             }
         }
@@ -93,7 +240,169 @@
             "1": {
                 "choiceText": "Run",
                 "outcomeCode": "3A",
+                "choiceValue": "3p0s"
+            }
+        }
+    },
+    "5B": {
+        "flavourText": "3 pounds a day isn't enough to live off! I could steal from the till...",
+        "speaker": ":name:",
+        "choices": {
+            "1": {
+                "choiceText": "Uphold your morals",
+                "outcomeCode": "6A",
                 "choiceValue": "0p0s"
+            },
+            "2": {
+                "choiceText": "A few pounds won't hurt",
+                "outcomeCode": "random 6B 6C",
+                "choiceValue": "2p2s",
+                "choiceOutcome": "changeSavings random"
+            },
+            "3": {
+                "choiceText": "A loaf of bread would be nice",
+                "outcomeCode": "random 6D 6C",
+                "choiceValue": "3p2s"
+            }
+        }
+    },
+    "6A": {
+        "flavourText": "My eyes aren't what they used to be, so tell me lad, did I get that change right?",
+        "speaker": "Old Man",
+        "choices": {
+            "1": {
+                "choiceText": "Give him back the extra money",
+                "outcomeCode": "7A",
+                "choiceValue": "0p0s"
+            },
+            "2": {
+                "choiceText": "Pocket the extra",
+                "outcomeCode": "random 7B 7C",
+                "choiceValue": "2p2s",
+                "choiceOutcome": "changeSavings random"
+            }
+        }
+    },
+    "6B": {
+        "flavourText": "Success! I managed to grab a few coins while noone was looking!",
+        "speaker": ":name:",
+        "choices": {
+            "1": {
+                "choiceText": "Grab some more",
+                "outcomeCode": "random 6B 6C",
+                "choiceValue": "2p2s",
+                "choiceOutcome": "changeSavings random"
+            },
+            "2": {
+                "choiceText": "Get back to work",
+                "outcomeCode": "6A",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "6C": {
+        "flavourText": "We're missing something. Anything to say, laddie?",
+        "speaker": "Head Baker",
+        "choices": {
+            "1": {
+                "choiceText": "Blame a customer",
+                "outcomeCode": "random 7B 7C",
+                "choiceValue": "0p0s"
+            },
+            "2": {
+                "choiceText": "Confess",
+                "outcomeCode": "7D",
+                "choiceValue": "5p3s"
+            }
+        }
+    },
+    "6D": {
+        "flavourText": "Success! I managed to grab a loaf while no-one was looking!",
+        "speaker": ":name:",
+        "choices": {
+            "1": {
+                "choiceText": "Get back to work",
+                "outcomeCode": "6A",
+                "choiceValue": "0p0s",
+                "choiceEffect": "gain Food"
+            }
+        }
+    },
+    "7A": {
+        "flavourText": "Good work today, here's your pay.",
+        "speaker": "Head Baker",
+        "choices": {
+            "1": {
+                "choiceText": "Head home",
+                "outcomeCode": "endOfDay",
+                "choiceValue": "0p0s",
+                "choiceEffect":"changeSavings 3p0s"
+            }
+        }
+    },
+    "7B": {
+        "flavourText": "Well what are you waiting for, get him! POLICE!",
+        "speaker": "Head Baker",
+        "choices": {
+            "1": {
+                "choiceText": "Follow along",
+                "outcomeCode": "8A",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "7C": {
+        "flavourText": "I don't beleive that for one second! POLICE!",
+        "speaker": "Head Baker",
+        "choices": {
+            "1": {
+                "choiceText": "Run",
+                "outcomeCode": "random 8B end1",
+                "choiceValue": "3p5s"
+            },
+            "2": {
+                "choiceText": "Fight",
+                "outcomeCode": "random 8B end1",
+                "choiceValue": "8p2s"
+            },
+            "3": {
+                "choiceText": "Give up",
+                "outcomeCode": "end2",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "7D": {
+        "flavourText": "Get out of my sight!",
+        "speaker": "Head Baker",
+        "choices": {
+            "1": {
+                "choiceText": "Comply with the police",
+                "outcomeCode": "end1",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "8A": {
+        "flavourText": "The baker beleives you! The coppers decide to make an example out of the 'theif', and ship him to Australia",
+        "speaker": ":none:",
+        "choices": {
+            "1": {
+                "choiceText": "Finish work",
+                "outcomeCode": "7A",
+                "choiceValue": "20p0s"
+            }
+        }
+    },
+    "8B": {
+        "flavourText": "You manage to get out",
+        "speaker": ":none:",
+        "choices": {
+            "1": {
+                "choiceText": "Head home",
+                "outcomeCode": "endOfDay",
+                "choiceValue": "20p0s",
+                "choiceEffect": "lose Job"
             }
         }
     }

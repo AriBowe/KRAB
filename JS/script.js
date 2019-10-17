@@ -31,6 +31,8 @@ var hasFood = false                         // Does the player have food for the
 var lastFood = 0                            // How many days ago did the player have food for the night?
 var hasHeat = false                         // Does the player have heat for the night? (Firewood)
 var lastHeat = 0                            // How many days ago did the player have heat for the night?
+var hasJob = false                          // Does the player have a job?
+var eventSpeaker = undefined                     // Who is speaking?
 
 // TEMPLATES ARE PROCESSED IN ON READY, AT THE BOTTOM OF THE FILE
 
@@ -41,8 +43,13 @@ function characterSelect() {                // Character selection
         characterOptionWorking.attr("id", "character" + i)
 
         var characterName = characterChoices.result.records[i]["Convict Name"];
-        characterName = characterName.split(", ")[1].split(".")[0] + " " + characterName.split(", ")[0];
-        var startingMoney = [Math.round(Math.random()*3), Math.round(Math.random()*5)];
+        try {
+            characterName = characterName.split(", ")[1].split(".")[0] + " " + characterName.split(", ")[0];
+        }
+        catch {
+            // Ignore
+        }
+        var startingMoney = [Math.round(Math.random()*3), Math.round(Math.random()*20)];
 
         characterOptionWorking.appendTo("#characterSelect");
         
@@ -75,7 +82,8 @@ function chooseCharacter(number, startingMoney) {
     choicesSelector.insertAdjacentHTML('beforeend', content);
 }
 
-function makeChoice(choiceCode, rawValue = "0p0s", choiceEffect = "none") {
+function makeChoice(choiceCode, rawValue = "0p0s", choiceEffect = undefined) {
+    console.log(choiceCode);
     if (choiceCode.startsWith("random")) {
         if (Math.random() < 0.5) {
             choiceCode = choiceCode.split(" ")[1];
@@ -85,29 +93,49 @@ function makeChoice(choiceCode, rawValue = "0p0s", choiceEffect = "none") {
     } else if (choiceCode.startsWith("ending")) {
         endingChoice(choiceCode);
         return;
-    } else if (choiceCode.startsWith("newDay")) {
+    } else if (choiceCode.startsWith("endOfDay")) {
         endOfDay();
         return;
+    } else if (choiceCode.startsWith("newDay")) {
+        displayDay();
+        return;
     }
+
+    applyEffect(choiceEffect);
 
     clearScreen();
 
     eventElement.appendTo("main");
-    choicesElement.appendTo("main")
+    detailsElement.appendTo("#event");
+    choicesElement.appendTo("main");
 
     var eventSelector = document.querySelector("#event > p:first-of-type"); // Selects the event description thing
-    var eventDetailsSelector = document.querySelector("#event > div:first-of-type")
+    var eventDetailsSelector = document.querySelector("#event > #character")
     var choicesSelector = document.querySelector("#choices"); // Selects the choices article
 
     var eventText = choiceData[choiceCode].flavourText; // Gets flavour text of question
     var choiceOptions = choiceData[choiceCode].choices; // Gets choices of question
     var choicesNumber = (Object.keys(choiceOptions).length); // Gets the number of choices
+    if (choiceData[choiceCode].speaker == ":name:") {
+        eventSpeaker = playerName + " (self)";
+    } else if (choiceData[choiceCode].speaker == ":none:") {
+        eventSpeaker = undefined;
+    } else {
+        eventSpeaker = choiceData[choiceCode].speaker;
+    }
 
-    eventDetailsSelector.childNodes[1].innerHTML = choiceOptions[i].speaker // Fills out the speaker details
-    eventSelector.innerHTML = eventText.toString(); // Fills out the event on the page
+    console.log(eventSpeaker)
+    console.log(choiceData[choiceCode].speaker)
+    if (eventSpeaker != undefined) {                    // Only triggers is there is a speaker
+        eventDetailsSelector.querySelector("h2").innerHTML = eventSpeaker;  // Fills out the speaker details
+    } else {
+        eventDetailsSelector.remove();
+    }
+
+    eventSelector.innerHTML = eventText.toString();     // Fills out the event on the page
 
     for (i = 1; i <= choicesNumber; i++) {
-        var content = '<a class="choiceButton" onClick="makeChoice(\'' + choiceOptions[i].outcomeCode + '\', \'' + choiceOptions[i].choiceValue + '\')">' + choiceOptions[i].choiceText + '</a>';
+        var content = '<a class="choiceButton" onClick="makeChoice(\'' + choiceOptions[i].outcomeCode + '\', \'' + choiceOptions[i].choiceValue + '\', \'' + choiceOptions[i].choiceEffect + '\')">' + choiceOptions[i].choiceText + '</a>';
         choicesSelector.insertAdjacentHTML('beforeend', content);
     }
 
@@ -119,7 +147,18 @@ function makeChoice(choiceCode, rawValue = "0p0s", choiceEffect = "none") {
 }
 
 function applyEffect(choiceEffect) {
-    return;
+    if (choiceEffect === undefined) {
+        return
+    } else if (choiceEffect.startsWith("changeSavings")){
+        choiceEffect = choiceEffect.split(" ");
+        changeSavings(choiceEffect[1]);
+    } else if (choiceEffect.startsWith("gain")){
+        choiceEffect = choiceEffect.split(" ");
+        window["has" + choiceEffect[1]] = true;
+    } else if (choiceEffect.startsWith("lose")){
+        choiceEffect = choiceEffect.split(" ");
+        window["has" + choiceEffect[1]] = false;
+    }
 }
 
 function clearScreen() {
@@ -168,11 +207,52 @@ function clearScreen() {
 function endOfDay() {
     clearScreen();
 
-    var choicesElement = document.querySelector("#choices");
-    var content = '<a class="choiceButton" onClick="makeChoice(\'newDay\')">Go home</a>';
-    choicesElement.insertAdjacentHTML('beforeend', content);
-
     endOfDayElement.appendTo("main")
+    choicesElement.appendTo("main")
+    
+    if (hasFood) {
+        var marker = document.querySelector(".Food p:first-of-type");
+        var button = document.querySelector(".Food" + " a:first-of-type");
+
+        marker.classList.add("bought");
+        marker.innerHTML = "Bought";
+
+        button.innerHTML = 'Sell food';
+        button.setAttribute('onClick', "gainMoney('4p0s')");
+    } else {
+        var marker = document.querySelector(".Food p:first-of-type");
+        var button = document.querySelector(".Food" + " a:first-of-type");
+
+        marker.classList.remove("bought");
+        marker.innerHTML = "Not bought";
+
+        button.innerHTML = 'Buy food';
+        button.setAttribute('onClick', "spendMoney('4p0s')");
+    }
+
+    if (hasHeat) {
+        var marker = document.querySelector(".Heat p:first-of-type");
+        var button = document.querySelector(".Heat" + " a:first-of-type");
+
+        marker.classList.add("bought");
+        marker.innerHTML = "Bought";
+
+        button.innerHTML = 'Sell heat';
+        button.setAttribute('onClick', "gainMoney('2p0s')");
+    } else {
+        var marker = document.querySelector(".Heat p:first-of-type");
+        var button = document.querySelector(".Heat" + " a:first-of-type");
+
+        marker.classList.remove("bought");
+        marker.innerHTML = "Not bought";
+
+        button.innerHTML = 'Buy heat';
+        button.setAttribute('onClick', "spendMoney('2p0s')");
+    }
+
+    var choicesSelector = document.querySelector("#choices");
+    var content = '<a class="choiceButton" onClick="makeChoice(\'newDay\')">Go home</a>';
+    choicesSelector.insertAdjacentHTML('beforeend', content);
 }
 
 function displayDay() {
@@ -204,7 +284,11 @@ function displayDay() {
 
     var dayNotifElement = '<div id="majorHeader"><p>Day ' + currentDay + '</p></div>';
     var choicesSelector = document.querySelector("#choices");
-    var choicesContent = '<a class="choiceButton" onClick="makeChoice(\'1A\', \'0p0s\')">Wake Up</a>';
+    if (hasJob) {
+        var choicesContent = '<a class="choiceButton" onClick="makeChoice(\'1B\', \'0p0s\')">Wake Up</a>';
+    } else {
+        var choicesContent = '<a class="choiceButton" onClick="makeChoice(\'1A\', \'0p0s\')">Wake Up</a>';
+    }
 
     document.querySelector("main").insertAdjacentHTML('afterbegin', dayNotifElement);
     choicesSelector.insertAdjacentHTML('beforeend', choicesContent);
@@ -229,18 +313,6 @@ function decodeValues(rawValue) {
         var shillingValue = 0;
     }
 
-    var currentShillingValue = currentSavings[1];
-
-    while (shillingValue < 0) {
-        poundValue -= 1;
-        shillingValue += 20;
-    }
-
-    while (shillingValue + currentShillingValue >= 20) {
-        poundValue += 1;
-        shillingValue -= 20;
-    }
-
     return [poundValue, shillingValue];
 }
     
@@ -253,7 +325,21 @@ function changeWantedValue(rawValue) {
 }
 
 function changeSavings(rawValue) {
-    var values = decodeValues(rawValue);
+    if (rawValue.startsWith("random")) {
+        var values = [Math.round(Math.random()*3), Math.round(Math.random()*20)];
+    } else {
+        var values = decodeValues(rawValue);
+    }
+
+    while (currentSavings[1] + values[1] < 0) {
+        values[0] -= 1;
+        values[1] += 20;
+    }
+
+    while (currentSavings[1] + values[1] >= 20) {
+        values[0] += 1;
+        values[1] -= 20;
+    }
 
     currentSavings[0] += values[0];
     currentSavings[1] += values[1];
@@ -432,22 +518,17 @@ $(document).ready(function() {
     });
 
     $.ajax({
-        url: "data/choices.json",
+        url: "data/new_choices.json",
         dataType: "json",
         success: function(results) {
             window.choiceData = results; // Global variable
         }
     });
 
-    $.ajax({
-        url: "data/ending.json",
-        dataType: "json",
-        success: function(results) {
-            window.endingData = results; // Global variable
-        }
-    });
-
     // Load templates
+    window.detailsElement = $("#event > *").clone();
+    document.querySelector("#event > *").remove(); // Need to remove the inside of eventElement
+    document.querySelector("#event > *").remove();
     window.eventElement = $("#event").clone();
     window.choicesElement = $("#choices").clone();
     window.endOfDayElement = $("#endOfDay").clone();
@@ -473,6 +554,6 @@ $(document).ready(function() {
     setTimeout(function() {
 		console.log(characterChoices);
         characterSelect();;
-    }, 1000);
+    }, 1200);
 });
 

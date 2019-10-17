@@ -37,7 +37,7 @@
             },
             "3": {
                 "choiceText": "Surrender yourself",
-                "outcomeCode": "newDay",
+                "outcomeCode": "endOfDay",
                 "choiceValue": "0p0s"
             }
         }
