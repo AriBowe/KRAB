@@ -405,5 +405,49 @@
                 "choiceEffect": "lose Job"
             }
         }
+    },
+    "end1": {
+        "flavourText": "You're going straight to Australia, boy!",
+        "speaker": "Police Officer",
+        "choices": {
+            "1": {
+                "choiceText": "Give up",
+                "outcomeCode": "end12",
+                "choiceValue": "1p1s"
+            }
+        }
+    },
+    "end12": {
+        "flavourText": "You were found guilty of numerous crimes, including theft and resisting arrest. Due to the massive overcrowing of England, you were sent to Australia to serve out your sentence.",
+        "speaker": ":none:",
+        "choices": {
+            "1": {
+                "choiceText": "The end",
+                "outcomeCode": "ending police",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "end2": {
+        "flavourText": "Good, at least you know not to struggle. Come with me!",
+        "speaker": "Police Officer",
+        "choices": {
+            "1": {
+                "choiceText": "Give up",
+                "outcomeCode": "end22",
+                "choiceValue": "0p0s"
+            }
+        }
+    },
+    "end22": {
+        "flavourText": "Good, at least you know not to struggle. Come with me!",
+        "speaker": ":none:",
+        "choices": {
+            "1": {
+                "choiceText": "Give up",
+                "outcomeCode": "ending police",
+                "choiceValue": "1p1s"
+            }
+        }
     }
 }

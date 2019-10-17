@@ -46,6 +46,14 @@ include 'statusbar.php';
             <a class="choiceButton" onClick="chooseCharacter()">Select</a>
         </div>
     </div>
+    <div id="endgame">
+        <h2></h2>
+        <p id="reason"></p>
+        <p id="finalSavings"></p>
+        <p id="finalWanted"></p>
+        <p id="finalDay"></p>
+        <p><strong>Please visit the museum staff to collect your ticket of leave</strong></p>
+    </div>
 </main>
 
 <?php 

@@ -94,7 +94,7 @@ function makeChoice(choiceCode, rawValue = "0p0s", choiceEffect = undefined) {
     }
     
     if (choiceCode.startsWith("ending")) {
-        endingChoice(choiceCode);
+        endingChoice(choiceCode.split(" ")[1]);
         return;
     } else if (choiceCode.startsWith("endOfDay")) {
         applyEffect(choiceEffect);
@@ -187,6 +187,12 @@ function clearScreen() {
 
     try {
         document.querySelector("#event").remove();
+    } catch (TypeError) {
+        // Ignore
+    }
+
+    try {
+        document.querySelector("#endgame").remove();
     } catch (TypeError) {
         // Ignore
     }
@@ -362,32 +368,44 @@ function changeSavings(rawValue) {
 
 
 function updateValues() {
-    var dayCountElement = document.querySelector("#day");
-    var wantedElement = document.querySelector("#wantedValue");
-    var savingsElement = document.querySelector("#savings");
+    var dayCountSelector = document.querySelector("#day");
+    var wantedSelector = document.querySelector("#wantedValue");
+    var savingsSelector = document.querySelector("#savings");
 
-    dayCountElement.innerHTML = currentDay;
-    wantedElement.innerHTML = wantedValue[0].toString() + " pence, " + wantedValue[1].toString() + " shillings";
-    savingsElement.innerHTML = currentSavings[0].toString() + " pence, " + currentSavings[1].toString() + " shillings";
+    dayCountSelector.innerHTML = currentDay;
+    wantedSelector.innerHTML = wantedValue[0].toString() + " pence, " + wantedValue[1].toString() + " shillings";
+    savingsSelector.innerHTML = currentSavings[0].toString() + " pence, " + currentSavings[1].toString() + " shillings";
 }
 
 function endOfGame(endingCode) {
     console.log("Ending: " + endingCode);
-    var eventElement = document.querySelector("#event > p:first-of-type"); // Selects the event description thing
-    var choicesElement = document.querySelector("#choices"); // Selects the choices article
+    clearScreen();
 
-    eventElement.remove();
-    choicesElement.remove();
+    endingElement.appendTo("main")
+    var reason = "An unknown reason"
 
-    var fieldsOptions = choiceData[endingCode].fields; // Gets fields of question
-    var fieldsNumber = (Object.keys(fieldsOptions).length); // Gets the number of fields
-
-    wantedValue = String(wantedValue[0]) + " pence, " + String(wantedValue[1]) + " shillings";
-
-    for (i = 1; i <= fieldsNumber; i++) {
-        var content = '<p><strong>' + fieldsOptions[i].title + '</strong> ' + eval(fieldsOptions[i].value) + '</p>';
-        document.querySelector("main").insertAdjacentHTML('beforeend', content);
+    if (endingCode == "food") {
+        var reason = "You and your family starved to death"
+        console.log(1)
+    } else if (endingCode == "heat") {
+        var reason = "You and your family froze to death"
+        console.log(2)
+    } else if (endingCode == "police") {
+        var reason = "You were caught by the police and shipped to Australia"
+        console.log(3)
     }
+
+    var endingHeaderSelector = document.querySelector("#endgame > h2");
+    var reasonSelector = document.querySelector("#endgame > #reason");
+    var finalSavingsSelector = document.querySelector("#endgame > #finalSavings");
+    var finalWantedSelector = document.querySelector("#endgame > #finalWanted");
+    var finalDaySelector = document.querySelector("#endgame > #finalDay");
+
+    endingHeaderSelector.innerHTML = "You've been caught!";
+    reasonSelector.innerHTML = reason;
+    finalSavingsSelector.innerHTML = "Your savings were: " + currentSavings[0] + " pence, and " + currentSavings[1] + " shillings";
+    finalWantedSelector.innerHTML = "You were wanted for: " + wantedValue[0] + " pence, and " + wantedValue[1] + " shillings";
+    finalDaySelector.innerHTML = "You survived for " + currentDay + " days";
 }
 
 function canAfford(rawCost) {
@@ -544,10 +562,11 @@ $(document).ready(function() {
     // Load templates
     window.detailsElement = $("#event > *").clone();
     document.querySelector("#event > *").remove(); // Need to remove the inside of eventElement
-    document.querySelector("#event > *").remove();
+    document.querySelector("#event > *").remove(); // Otherwise we get BAD errors
     window.eventElement = $("#event").clone();
     window.choicesElement = $("#choices").clone();
     window.endOfDayElement = $("#endOfDay").clone();
+    window.endingElement = $("#endgame").clone();
 
     // We only want one template of character
     document.querySelector(".characterOption").remove();
@@ -559,6 +578,7 @@ $(document).ready(function() {
     document.querySelector("#choices").remove();
     document.querySelector("#endOfDay").remove();
     document.querySelector(".characterOption").remove();
+    document.querySelector("#endgame").remove();
     
 
     // Need to load characterSelect after removing it's inner options
