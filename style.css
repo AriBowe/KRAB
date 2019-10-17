@@ -128,7 +128,9 @@ main {
 }
 
 .characterOption img {
-	height: 30vh;
+	width: 80%;
+	max-height: 40vh;
+	object-fit: contain;
 }
 
 #majorHeader {

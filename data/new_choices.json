@@ -10,7 +10,7 @@
             },
             "2": {
                 "choiceText": "Steal bread",
-                "outcomeCode": "random 2B 2C",
+                "outcomeCode": "2B",
                 "choiceValue": "0p0s"
             },
             "3": {
@@ -31,7 +31,7 @@
             },
             "2": {
                 "choiceText": "Steal bread",
-                "outcomeCode": "random 2B 2C",
+                "outcomeCode": "2B",
                 "choiceValue": "0p0s"
             },
             "3": {
@@ -59,7 +59,8 @@
             "1": {
                 "choiceText": "Run",
                 "outcomeCode": "random 3C 3D",
-                "choiceValue": "3p5s"
+                "choiceValue": "3p5s",
+                "choiceEffect": "gain Food"
             }
         }
     },
@@ -119,8 +120,7 @@
             "1": {
                 "choiceText": "Head home",
                 "outcomeCode": "endOfDay",
-                "choiceValue": "0p0s",
-                "choiceEffect": "gain Food"
+                "choiceValue": "0p0s"
             }
         }
     },
@@ -168,7 +168,7 @@
             },
             "2": {
                 "choiceText": "Steal bread",
-                "outcomeCode": "random 2B 2C",
+                "outcomeCode": "2B",
                 "choiceValue": "0p0s"
             },
             "3": {
@@ -257,7 +257,7 @@
                 "choiceText": "A few pounds won't hurt",
                 "outcomeCode": "random 6B 6C",
                 "choiceValue": "2p2s",
-                "choiceOutcome": "changeSavings random"
+                "choiceEffect": "changeSavings random"
             },
             "3": {
                 "choiceText": "A loaf of bread would be nice",
@@ -277,9 +277,9 @@
             },
             "2": {
                 "choiceText": "Pocket the extra",
-                "outcomeCode": "random 7B 7C",
+                "outcomeCode": "random 7A 6C",
                 "choiceValue": "2p2s",
-                "choiceOutcome": "changeSavings random"
+                "choiceEffect": "changeSavings random"
             }
         }
     },
@@ -291,7 +291,7 @@
                 "choiceText": "Grab some more",
                 "outcomeCode": "random 6B 6C",
                 "choiceValue": "2p2s",
-                "choiceOutcome": "changeSavings random"
+                "choiceEffect": "changeSavings random"
             },
             "2": {
                 "choiceText": "Get back to work",

@@ -16,6 +16,7 @@ include 'statusbar.php';
     <div id="choices">
     </div>
     <div id="endOfDay">
+        <h2>You can survive 2 days in a row without food, and 3 in a row without heat</h2>
         <div class="purchase Food">
             <a class="choiceButton" onClick="spendMoney('Food','4p')">Buy food</a>
             <p>Not bought</p>

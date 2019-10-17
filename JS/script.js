@@ -27,9 +27,9 @@ var playerName = "placeholder name";        // Player character name
 var dateOfDepature = "1/1/1 - placeholder";    // Date the convict died
 var currentDay = 0;                         // The current day, as number of days from the start
 var currentSavings = [0, 0];                // The player's current savings, as [pounds, shillings] where 20 shillings == one pound
-var hasFood = false                         // Does the player have food for the night?
+var hasFood = true                         // Does the player have food for the night?
 var lastFood = 0                            // How many days ago did the player have food for the night?
-var hasHeat = false                         // Does the player have heat for the night? (Firewood)
+var hasHeat = true                         // Does the player have heat for the night? (Firewood)
 var lastHeat = 0                            // How many days ago did the player have heat for the night?
 var hasJob = false                          // Does the player have a job?
 var eventSpeaker = undefined                     // Who is speaking?
@@ -85,21 +85,29 @@ function chooseCharacter(number, startingMoney) {
 function makeChoice(choiceCode, rawValue = "0p0s", choiceEffect = undefined) {
     console.log(choiceCode);
     if (choiceCode.startsWith("random")) {
+        console.log("randomising")
         if (Math.random() < 0.5) {
             choiceCode = choiceCode.split(" ")[1];
         } else {
             choiceCode = choiceCode.split(" ")[2];
         }
-    } else if (choiceCode.startsWith("ending")) {
+    }
+    
+    if (choiceCode.startsWith("ending")) {
         endingChoice(choiceCode);
         return;
     } else if (choiceCode.startsWith("endOfDay")) {
+        applyEffect(choiceEffect);
         endOfDay();
         return;
     } else if (choiceCode.startsWith("newDay")) {
         displayDay();
         return;
     }
+
+    console.log(choiceCode);
+    console.log("choiceEffect: " + choiceEffect);
+    console.log("stored effect: " + choiceData[choiceCode]);
 
     applyEffect(choiceEffect);
 
@@ -124,8 +132,6 @@ function makeChoice(choiceCode, rawValue = "0p0s", choiceEffect = undefined) {
         eventSpeaker = choiceData[choiceCode].speaker;
     }
 
-    console.log(eventSpeaker)
-    console.log(choiceData[choiceCode].speaker)
     if (eventSpeaker != undefined) {                    // Only triggers is there is a speaker
         eventDetailsSelector.querySelector("h2").innerHTML = eventSpeaker;  // Fills out the speaker details
     } else {
@@ -136,6 +142,7 @@ function makeChoice(choiceCode, rawValue = "0p0s", choiceEffect = undefined) {
 
     for (i = 1; i <= choicesNumber; i++) {
         var content = '<a class="choiceButton" onClick="makeChoice(\'' + choiceOptions[i].outcomeCode + '\', \'' + choiceOptions[i].choiceValue + '\', \'' + choiceOptions[i].choiceEffect + '\')">' + choiceOptions[i].choiceText + '</a>';
+        console.log("Saved effect: " + choiceOptions[i].choiceEffect)
         choicesSelector.insertAdjacentHTML('beforeend', content);
     }
 
@@ -147,17 +154,23 @@ function makeChoice(choiceCode, rawValue = "0p0s", choiceEffect = undefined) {
 }
 
 function applyEffect(choiceEffect) {
-    if (choiceEffect === undefined) {
+    console.log("applying effect")
+    if (choiceEffect == undefined) {
         return
     } else if (choiceEffect.startsWith("changeSavings")){
         choiceEffect = choiceEffect.split(" ");
         changeSavings(choiceEffect[1]);
+        console.log(choiceEffect);
     } else if (choiceEffect.startsWith("gain")){
         choiceEffect = choiceEffect.split(" ");
         window["has" + choiceEffect[1]] = true;
+        console.log(choiceEffect);
+        console.log("has" + choiceEffect[1])
     } else if (choiceEffect.startsWith("lose")){
         choiceEffect = choiceEffect.split(" ");
         window["has" + choiceEffect[1]] = false;
+        console.log(choiceEffect);
+        console.log("has" + choiceEffect[1])
     }
 }
 
@@ -218,7 +231,7 @@ function endOfDay() {
         marker.innerHTML = "Bought";
 
         button.innerHTML = 'Sell food';
-        button.setAttribute('onClick', "gainMoney('4p0s')");
+        button.setAttribute('onClick', "gainMoney('Food', '4p0s')");
     } else {
         var marker = document.querySelector(".Food p:first-of-type");
         var button = document.querySelector(".Food" + " a:first-of-type");
@@ -227,7 +240,7 @@ function endOfDay() {
         marker.innerHTML = "Not bought";
 
         button.innerHTML = 'Buy food';
-        button.setAttribute('onClick', "spendMoney('4p0s')");
+        button.setAttribute('onClick', "spendMoney('Food', '4p0s')");
     }
 
     if (hasHeat) {
@@ -238,7 +251,7 @@ function endOfDay() {
         marker.innerHTML = "Bought";
 
         button.innerHTML = 'Sell heat';
-        button.setAttribute('onClick', "gainMoney('2p0s')");
+        button.setAttribute('onClick', "gainMoney('Heat', '2p0s')");
     } else {
         var marker = document.querySelector(".Heat p:first-of-type");
         var button = document.querySelector(".Heat" + " a:first-of-type");
@@ -247,7 +260,7 @@ function endOfDay() {
         marker.innerHTML = "Not bought";
 
         button.innerHTML = 'Buy heat';
-        button.setAttribute('onClick', "spendMoney('2p0s')");
+        button.setAttribute('onClick', "spendMoney('Heat', '2p0s')");
     }
 
     var choicesSelector = document.querySelector("#choices");
@@ -271,9 +284,9 @@ function displayDay() {
         lastHeat += 1
     }
 
-    if (lastHeat > 2) {
+    if (lastFood > 2) {
         endOfGame("food")
-    } else if (lastHeat > 2) {
+    } else if (lastHeat > 3) {
         endOfGame("heat")
     }
 
@@ -343,6 +356,8 @@ function changeSavings(rawValue) {
 
     currentSavings[0] += values[0];
     currentSavings[1] += values[1];
+
+    updateValues();
 }
 
 
@@ -357,6 +372,7 @@ function updateValues() {
 }
 
 function endOfGame(endingCode) {
+    console.log("Ending: " + endingCode);
     var eventElement = document.querySelector("#event > p:first-of-type"); // Selects the event description thing
     var choicesElement = document.querySelector("#choices"); // Selects the choices article
 
