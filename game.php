@@ -31,19 +31,19 @@ include 'statusbar.php';
 
         <div class="characterOption">
             <h2 class="characterName">Bob Bobbings</h2>
-            <img class="characterImage" src="Images/convict1.jpg">
+            <img class="characterImage" src="images/convict1.jpg">
             <p class="startingMoney">Savings: 2 pounds, 3 shillings</p>
             <a class="choiceButton" onClick="chooseCharacter()">Select</a>
         </div>
         <div class="characterOption">
             <h2 class="characterName">Bob Bobbings</h2>
-            <img class="characterImage" src="Images/convict2.jpg">
+            <img class="characterImage" src="images/convict2.jpg">
             <p class="startingMoney">Savings: 2 pounds, 3 shillings</p>
             <a class="choiceButton" onClick="chooseCharacter()">Select</a>
         </div>
         <div class="characterOption">
             <h2 class="characterName">Bob Bobbings</h2>
-            <img class="characterImage" src="Images/convict3.jpg">
+            <img class="characterImage" src="images/convict3.jpg">
             <p class="startingMoney">Savings: 2 pounds, 3 shillings</p>
             <a class="choiceButton" onClick="chooseCharacter()">Select</a>
         </div>

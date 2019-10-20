@@ -54,6 +54,7 @@ function characterSelect() {                // Character selection
         characterOptionWorking.appendTo("#characterSelect");
         
         $("#character" + i + " h2").html(characterName);
+        $("#character" + i + " img").attr("src", "images/convict" + (i + 1) + ".jpg")
         $("#character" + i + " .startingMoney").html("Savings: " + startingMoney[0] + " pence, " + startingMoney[1] + " shillings");
         $("#character" + i + " .choiceButton").attr("onClick", "chooseCharacter(" + i + ", [" + startingMoney + "])");
         console.log("Generated character")
