@@ -94,7 +94,7 @@ function makeChoice(choiceCode, rawValue = "0p0s", choiceEffect = undefined) {
     }
     
     if (choiceCode.startsWith("ending")) {
-        endingChoice(choiceCode.split(" ")[1]);
+        endOfGame(choiceCode.split(" ")[1]);
         return;
     } else if (choiceCode.startsWith("endOfDay")) {
         applyEffect(choiceEffect);
