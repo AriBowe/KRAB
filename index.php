@@ -7,7 +7,7 @@ include 'sidebar.php';
 
 <main>
     <div class="choices">
-        <a class="choiceButton" href="/game.php">CLICK TO PLAY</a>
+        <a class="choiceButton" href="/game.php">Select a character</a>
     </div>
 </main>
 

@@ -25,7 +25,9 @@ include 'statusbar.php';
             <p>Not bought</p>
         </div>
     </div> 
+    <h2>Choose a character</h2>
     <div id="characterSelect">
+
         <div class="characterOption">
             <h2 class="characterName">Bob Bobbings</h2>
             <p class="startingMoney">Savings: 2 pounds, 3 shillings</p>
