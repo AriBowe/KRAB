@@ -37,7 +37,6 @@ header {
 
 header h1 {
 	font-size: 1em;
-	/* line-height: 1.5em; */
 	color: white;
 	text-align: left;
 }
@@ -431,36 +430,6 @@ footer {
 	align-items: center;
 }
 
-/*#records {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-}
-
-.record {
-	display: block;
-	width: 9.5%;
-	height: 270px;
-	padding: 5em;
-	background-image: url("images/poster.jpg");
-	background-repeat: none;
-	background-size: 100%;
-	box-shadow: rgba(0,0,0,0.25) 0 5px 5px;
-	border-radius: 5px;
-	margin-bottom: 2%;
-	position: relative;
-}
-
-.record.record-template {
-	display: none;
-}
-
-.record .record-content {
-	display: flex;
-	align-items: flex-start;
-}
-*/
-
 .Convicts {
 	top: 12.5vh;
 	height: 100vh;
@@ -521,11 +490,21 @@ input[type=text]:focus {
 /*Hall of fame; data.php*/
 #newRecords {
 	border: 5px;
-	padding: 5px; 
 	text-align: center; 
 }
 
 .newRec img {
 	padding: 5px;
 	padding-top: 10px;
+	margin-left: 40px;
+	
+	
+}
+
+.Convicts h1 {
+	font-size: 1.3em;
+	font-family: 'Fredericka the Great', serif;
+	color: rgb(83,53,39);
+	text-align: center;
+	padding: 10px; 
 }
