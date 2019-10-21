@@ -7,7 +7,8 @@ include 'statusbar.php';
 ?>
 <main>
     <div id="event">
-        <div id="character">   
+        <div id="character">
+             
             <h2>Character Name</h2>
         </div>
         <p>You're a poor Englishman in the 19th century. Click the buttons below to make decisions and go about your day.</p>
@@ -25,19 +26,24 @@ include 'statusbar.php';
             <p>Not bought</p>
         </div>
     </div> 
+    
     <div id="characterSelect">
+
         <div class="characterOption">
             <h2 class="characterName">Bob Bobbings</h2>
+            <img class="characterImage" src="images/convict1.jpg">
             <p class="startingMoney">Savings: 2 pounds, 3 shillings</p>
             <a class="choiceButton" onClick="chooseCharacter()">Select</a>
         </div>
         <div class="characterOption">
             <h2 class="characterName">Bob Bobbings</h2>
+            <img class="characterImage" src="images/convict2.jpg">
             <p class="startingMoney">Savings: 2 pounds, 3 shillings</p>
             <a class="choiceButton" onClick="chooseCharacter()">Select</a>
         </div>
         <div class="characterOption">
             <h2 class="characterName">Bob Bobbings</h2>
+            <img class="characterImage" src="images/convict3.jpg">
             <p class="startingMoney">Savings: 2 pounds, 3 shillings</p>
             <a class="choiceButton" onClick="chooseCharacter()">Select</a>
         </div>

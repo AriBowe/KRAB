@@ -54,6 +54,7 @@ function characterSelect() {                // Character selection
         characterOptionWorking.appendTo("#characterSelect");
         
         $("#character" + i + " h2").html(characterName);
+        $("#character" + i + " img").attr("src", "images/convict" + (i + 1) + ".jpg")
         $("#character" + i + " .startingMoney").html("Savings: " + startingMoney[0] + " pence, " + startingMoney[1] + " shillings");
         $("#character" + i + " .choiceButton").attr("onClick", "chooseCharacter(" + i + ", [" + startingMoney + "])");
         console.log("Generated character")
@@ -94,7 +95,7 @@ function makeChoice(choiceCode, rawValue = "0p0s", choiceEffect = undefined) {
     }
     
     if (choiceCode.startsWith("ending")) {
-        endingChoice(choiceCode.split(" ")[1]);
+        endOfGame(choiceCode.split(" ")[1]);
         return;
     } else if (choiceCode.startsWith("endOfDay")) {
         applyEffect(choiceEffect);
@@ -395,12 +396,23 @@ function endOfGame(endingCode) {
         console.log(3)
     }
 
+    try {
+        var choicesSelector = document.querySelector("#choices")
+    } catch {
+        // Pass
+    }
+
     var endingHeaderSelector = document.querySelector("#endgame > h2");
     var reasonSelector = document.querySelector("#endgame > #reason");
     var finalSavingsSelector = document.querySelector("#endgame > #finalSavings");
     var finalWantedSelector = document.querySelector("#endgame > #finalWanted");
     var finalDaySelector = document.querySelector("#endgame > #finalDay");
 
+    try {
+        choicesSelector.remove();
+    } catch {
+        // Pass
+    }
     endingHeaderSelector.innerHTML = "You've been caught!";
     reasonSelector.innerHTML = reason;
     finalSavingsSelector.innerHTML = "Your savings were: " + currentSavings[0] + " pence, and " + currentSavings[1] + " shillings";

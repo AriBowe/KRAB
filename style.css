@@ -431,7 +431,7 @@ footer {
 	align-items: center;
 }
 
-#records {
+/*#records {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
@@ -459,6 +459,7 @@ footer {
 	display: flex;
 	align-items: flex-start;
 }
+*/
 
 .Convicts {
 	top: 12.5vh;
@@ -515,4 +516,16 @@ input[type=text]:focus {
 
 #submit a:active {
 	color:  rgb(83,53,39);
+}
+
+/*Hall of fame; data.php*/
+#newRecords {
+	border: 5px;
+	padding: 5px; 
+	text-align: center; 
+}
+
+.newRec img {
+	padding: 5px;
+	padding-top: 10px;
 }
