@@ -396,12 +396,23 @@ function endOfGame(endingCode) {
         console.log(3)
     }
 
+    try {
+        var choicesSelector = document.querySelector("#choices")
+    } catch {
+        // Pass
+    }
+
     var endingHeaderSelector = document.querySelector("#endgame > h2");
     var reasonSelector = document.querySelector("#endgame > #reason");
     var finalSavingsSelector = document.querySelector("#endgame > #finalSavings");
     var finalWantedSelector = document.querySelector("#endgame > #finalWanted");
     var finalDaySelector = document.querySelector("#endgame > #finalDay");
 
+    try {
+        choicesSelector.remove();
+    } catch {
+        // Pass
+    }
     endingHeaderSelector.innerHTML = "You've been caught!";
     reasonSelector.innerHTML = reason;
     finalSavingsSelector.innerHTML = "Your savings were: " + currentSavings[0] + " pence, and " + currentSavings[1] + " shillings";
